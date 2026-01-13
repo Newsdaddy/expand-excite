@@ -51,7 +51,20 @@ const FeaturesSection = () => {
             ECDB가 제공하는 것
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            ❌ 무작위 리드 수집 → ✅ "지금 연락해야 할 커머스 기업 리스트"
+            <span className="inline-block">❌ 무작위 데이터 수집 →</span>{" "}
+            <span className="inline-block">✅ 지금 반드시 알아야 할 커머스 기업 KPI와 리스트</span>
+          </p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            제공 데이터 상세 내용은{" "}
+            <a
+              href="https://ecdb.com/features"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+            >
+              ecdb.com/features
+            </a>
+            에서 확인하세요
           </p>
         </div>
 

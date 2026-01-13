@@ -12,7 +12,7 @@ const WhySection = () => {
     },
     {
       old: "내부 리드 DB → 최신성/우선순위 부족",
-      new: "\"왜 이 회사인가\"가 설명된다",
+      new: "'왜 이 회사인가'가 설명된다",
     },
   ];
 
@@ -66,7 +66,8 @@ const WhySection = () => {
               ECDB = Market Intelligence + Partnership Targeting
             </p>
             <p className="mt-2 text-muted-foreground">
-              "시장 리서치 툴" 뿐만 아니라 "파트너십 & 세일즈 인텔리전스"로도 작동
+              <span className="inline-block">'시장 리서치 툴' 뿐만 아니라</span>{" "}
+              <span className="inline-block">'파트너십 & 세일즈 인텔리전스'로도 작동</span>
             </p>
           </div>
         </div>

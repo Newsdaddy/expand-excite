@@ -21,6 +21,9 @@ const Header = () => {
           <a href="#solutions" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
             Solutions
           </a>
+          <a href="#pricing" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            Pricing
+          </a>
           <a href="#why-ecdb" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
             Why ECDB
           </a>
@@ -30,8 +33,8 @@ const Header = () => {
           <Button variant="ghost" size="sm">
             로그인
           </Button>
-          <Button variant="hero" size="sm">
-            무료 체험
+          <Button variant="gold" size="sm">
+            상담하기
           </Button>
         </div>
       </div>

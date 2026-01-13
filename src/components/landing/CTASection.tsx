@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { Calendar, ArrowRight, Sparkles } from "lucide-react";
 
 const CTASection = () => {
   return (
@@ -22,23 +22,24 @@ const CTASection = () => {
             </h2>
             
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-              APAC 본사 기업과 로지스틱/커머스 인프라 기업이
-              글로벌 이커머스 시장에서 데이터로 결정하게 만드는
-              글로벌 커머스 인텔리전스 플랫폼
+              <span className="inline-block">APAC 본사 기업과 로지스틱/커머스 인프라 기업이</span>{" "}
+              <span className="inline-block">글로벌 이커머스 시장에서 데이터로 결정하게 만드는</span>{" "}
+              <span className="inline-block">글로벌 커머스 인텔리전스 플랫폼</span>
             </p>
             
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button variant="gold" size="xl">
-                무료로 시작하기
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <Calendar className="mr-2 h-5 w-5" />
+                데모 예약하기
               </Button>
               <Button variant="heroOutline" size="xl">
-                데모 예약하기
+                구독 상담하기
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
             
             <p className="mt-6 text-sm text-muted-foreground">
-              신용카드 불필요 · 14일 무료 체험 · 언제든 취소 가능
+              신용카드 및 현금 송금 결제 가능 · 언제든 취소 가능
             </p>
           </div>
         </div>
