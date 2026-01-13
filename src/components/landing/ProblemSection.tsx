@@ -5,7 +5,7 @@ const ProblemSection = () => {
     {
       icon: HelpCircle,
       title: "국가 간 비교 기준 부재",
-      description: "글로벌 커머스 시장은 크지만, 구조가 다르고 비교 기준이 없습니다.",
+      description: "글로벌 커머스 시장 비교 시 기준이 중구난방입니다.",
       track: "Strategy",
     },
     {
@@ -33,10 +33,11 @@ const ProblemSection = () => {
       <div className="container mx-auto px-6">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="font-display text-3xl font-bold sm:text-4xl">
-            시장 · 플랫폼 · 기업 정보는 흩어져 있다
+            <span className="inline-block">시장 · 플랫폼 · 기업 정보는</span>{" "}
+            <span className="inline-block">흩어져 있다</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            결정도, 영업도 느립니다
+            의사결정도, 영업도 느립니다
           </p>
         </div>
 
@@ -74,7 +75,8 @@ const ProblemSection = () => {
 
         <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-border/50 bg-muted/30 p-6 text-center">
           <p className="text-lg font-medium text-muted-foreground">
-            한 줄 요약: <span className="text-foreground">"누가 곧 커질지, 누구에게 지금 연락해야 하는지 모른다."</span>
+            <span className="inline-block">한 줄 요약:</span>{" "}
+            <span className="inline-block text-foreground">'누가 곧 커질지, 누구에게 지금 연락해야 하는지 모른다.'</span>
           </p>
         </div>
       </div>

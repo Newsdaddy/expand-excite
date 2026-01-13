@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Globe, TrendingUp, Users } from "lucide-react";
+import { Calendar, ArrowRight, Globe, TrendingUp, Users } from "lucide-react";
 
 const HeroSection = () => {
   return (
@@ -27,19 +27,22 @@ const HeroSection = () => {
 
         {/* Subheadline */}
         <p className="animate-slide-up mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl" style={{ animationDelay: '0.1s' }}>
-          어디에 진출할지 · 어떤 플랫폼과 협업할지 · 누구에게 먼저 영업할지
+          <span className="inline-block">어디에 진출할지</span>{" · "}
+          <span className="inline-block">어떤 플랫폼과 협업할지</span>{" · "}
+          <span className="inline-block">누구에게 먼저 영업할지</span>
           <br />
           <span className="text-foreground">데이터로 결정하세요.</span>
         </p>
 
         {/* CTA Buttons */}
         <div className="animate-slide-up mt-10 flex flex-col items-center gap-4 sm:flex-row" style={{ animationDelay: '0.2s' }}>
-          <Button variant="hero" size="xl">
-            무료로 시작하기
-            <ArrowRight className="ml-2 h-5 w-5" />
+          <Button variant="gold" size="xl">
+            <Calendar className="mr-2 h-5 w-5" />
+            데모 예약하기
           </Button>
           <Button variant="heroOutline" size="xl">
-            데모 보기
+            구독 상담하기
+            <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
 

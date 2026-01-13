@@ -63,7 +63,7 @@ const SolutionSection = () => {
               Expansion Decision Intelligence
             </h3>
             <p className="mt-2 text-muted-foreground">
-              전략팀을 위한 시장 확장 의사결정 인텔리전스
+              D2C 전략을 위한 의사결정 인텔리전스
             </p>
 
             <div className="mt-8 space-y-6">
