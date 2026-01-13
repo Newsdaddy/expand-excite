@@ -1,0 +1,50 @@
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Sparkles } from "lucide-react";
+
+const CTASection = () => {
+  return (
+    <section className="relative py-24">
+      <div className="container mx-auto px-6">
+        <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-gradient-to-br from-card via-muted/30 to-card p-12 text-center md:p-16">
+          {/* Decorative elements */}
+          <div className="absolute -left-20 -top-20 h-40 w-40 rounded-full bg-primary/20 blur-3xl" />
+          <div className="absolute -bottom-20 -right-20 h-40 w-40 rounded-full bg-secondary/20 blur-3xl" />
+          
+          <div className="relative">
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent">
+              <Sparkles className="h-8 w-8 text-primary-foreground" />
+            </div>
+            
+            <h2 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">
+              이번 분기 영업에
+              <br />
+              <span className="text-gradient-gold">바로 쓰는 툴</span>
+            </h2>
+            
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+              APAC 본사 기업과 로지스틱/커머스 인프라 기업이
+              글로벌 이커머스 시장에서 데이터로 결정하게 만드는
+              글로벌 커머스 인텔리전스 플랫폼
+            </p>
+            
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button variant="gold" size="xl">
+                무료로 시작하기
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button variant="heroOutline" size="xl">
+                데모 예약하기
+              </Button>
+            </div>
+            
+            <p className="mt-6 text-sm text-muted-foreground">
+              신용카드 불필요 · 14일 무료 체험 · 언제든 취소 가능
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default CTASection;
