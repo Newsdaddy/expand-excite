@@ -1,8 +1,43 @@
 import { Button } from "@/components/ui/button";
-import { Calendar, Gift, FileCheck, Users, ArrowRight } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Calendar, Gift, FileCheck, Users, ArrowRight, Send } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 import managerPhoto from "@/assets/byeongjin-jeong.jpg";
 
 const ContactSection = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    toast({
+      title: "상담 신청이 완료되었습니다",
+      description: "담당 매니저가 빠른 시일 내에 연락드리겠습니다.",
+    });
+    
+    setFormData({ name: "", company: "", email: "", phone: "", message: "" });
+    setIsSubmitting(false);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   const benefits = [
     {
       icon: Users,
@@ -75,15 +110,105 @@ const ContactSection = () => {
               <p className="text-sm text-primary">APAC Country Manager</p>
             </div>
 
-            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button variant="gold" size="xl">
-                <Calendar className="mr-2 h-5 w-5" />
-                데모 예약하기
-              </Button>
-              <Button variant="heroOutline" size="xl">
-                구독 상담하기
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+            {/* Contact Form */}
+            <div className="mt-10 rounded-2xl border border-border/30 bg-muted/20 p-6 md:p-8">
+              <h3 className="mb-6 text-center font-display text-xl font-bold">
+                구독 상담 신청
+              </h3>
+              
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">이름 *</Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      placeholder="홍길동"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="bg-background/50"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="company">회사명 *</Label>
+                    <Input
+                      id="company"
+                      name="company"
+                      placeholder="(주)회사명"
+                      value={formData.company}
+                      onChange={handleChange}
+                      required
+                      className="bg-background/50"
+                    />
+                  </div>
+                </div>
+                
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="email">이메일 주소 *</Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="email@company.com"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="bg-background/50"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">전화번호 *</Label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      placeholder="010-0000-0000"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      className="bg-background/50"
+                    />
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="message">상담 의뢰 내용 *</Label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder="궁금하신 점이나 상담받고 싶은 내용을 자유롭게 작성해 주세요."
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={4}
+                    className="bg-background/50 resize-none"
+                  />
+                </div>
+                
+                <Button 
+                  type="submit" 
+                  variant="gold" 
+                  size="xl" 
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    "전송 중..."
+                  ) : (
+                    <>
+                      <Send className="mr-2 h-5 w-5" />
+                      상담 신청하기
+                    </>
+                  )}
+                </Button>
+                
+                <p className="text-center text-xs text-muted-foreground">
+                  신청하신 내용은 담당 매니저에게 직접 전달되며,<br />
+                  영업일 기준 1~2일 내 연락드립니다.
+                </p>
+              </form>
             </div>
           </div>
         </div>
