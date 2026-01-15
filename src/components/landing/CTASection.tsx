@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowRight, Sparkles } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const CTASection = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative py-24">
       <div className="container mx-auto px-6">
@@ -16,30 +19,30 @@ const CTASection = () => {
             </div>
             
             <h2 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">
-              이번 분기 영업에
+              {t('cta.title1')}
               <br />
-              <span className="text-gradient-gold">바로 쓰는 툴</span>
+              <span className="text-gradient-gold">{t('cta.title2')}</span>
             </h2>
             
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-              <span className="inline-block">APAC 본사 기업과 로지스틱/커머스 인프라 기업이</span>{" "}
-              <span className="inline-block">글로벌 이커머스 시장에서 데이터로 결정하게 만드는</span>{" "}
-              <span className="inline-block">글로벌 커머스 인텔리전스 플랫폼</span>
+              <span className="inline-block">{t('cta.desc1')}</span>{" "}
+              <span className="inline-block">{t('cta.desc2')}</span>{" "}
+              <span className="inline-block">{t('cta.desc3')}</span>
             </p>
             
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button variant="gold" size="xl">
                 <Calendar className="mr-2 h-5 w-5" />
-                데모 예약하기
+                {t('cta.demoBtn')}
               </Button>
               <Button variant="heroOutline" size="xl">
-                구독 상담하기
+                {t('cta.consultBtn')}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
             
             <p className="mt-6 text-sm text-muted-foreground">
-              신용카드 및 현금 송금 결제 가능 · 언제든 취소 가능
+              {t('cta.paymentNote')}
             </p>
           </div>
         </div>

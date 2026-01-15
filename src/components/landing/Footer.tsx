@@ -1,6 +1,9 @@
 import { Database } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
+
   return (
     <footer className="border-t border-border/50 bg-card/50 py-12">
       <div className="container mx-auto px-6">
@@ -13,16 +16,16 @@ const Footer = () => {
           </div>
           
           <nav className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-            <a href="#" className="transition-colors hover:text-foreground">Features</a>
-            <a href="#" className="transition-colors hover:text-foreground">Solutions</a>
-            <a href="#" className="transition-colors hover:text-foreground">Pricing</a>
-            <a href="#" className="transition-colors hover:text-foreground">Contact</a>
-            <a href="#" className="transition-colors hover:text-foreground">Privacy</a>
-            <a href="#" className="transition-colors hover:text-foreground">Terms</a>
+            <a href="#features" className="transition-colors hover:text-foreground">{t('footer.features')}</a>
+            <a href="#solutions" className="transition-colors hover:text-foreground">{t('footer.solutions')}</a>
+            <a href="#pricing" className="transition-colors hover:text-foreground">{t('footer.pricing')}</a>
+            <a href="#contact" className="transition-colors hover:text-foreground">{t('footer.contact')}</a>
+            <a href="#" className="transition-colors hover:text-foreground">{t('footer.privacy')}</a>
+            <a href="#" className="transition-colors hover:text-foreground">{t('footer.terms')}</a>
           </nav>
           
           <p className="text-sm text-muted-foreground">
-            © 2026 ECDB. All rights reserved.
+            {t('footer.copyright')}
           </p>
         </div>
       </div>

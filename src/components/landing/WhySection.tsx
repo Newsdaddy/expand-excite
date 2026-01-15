@@ -1,18 +1,21 @@
 import { ArrowRight, Check, X } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const WhySection = () => {
+  const { t } = useLanguage();
+
   const comparisons = [
     {
-      old: "시장 리포트 → 전략팀만 사용",
-      new: "전략과 영업을 같은 데이터로 연결",
+      old: t('why.old1'),
+      new: t('why.new1'),
     },
     {
-      old: "LinkedIn Sales Navigator → 맥락 없음",
-      new: "시장 성장 데이터 + 세일즈 리드 결합",
+      old: t('why.old2'),
+      new: t('why.new2'),
     },
     {
-      old: "내부 리드 DB → 최신성/우선순위 부족",
-      new: "'왜 이 회사인가'가 설명된다",
+      old: t('why.old3'),
+      new: t('why.new3'),
     },
   ];
 
@@ -26,10 +29,10 @@ const WhySection = () => {
       <div className="container relative mx-auto px-6">
         <div className="mx-auto max-w-3xl text-center">
           <span className="text-sm font-medium uppercase tracking-wider text-secondary">
-            Why ECDB
+            {t('why.label')}
           </span>
           <h2 className="mt-4 font-display text-3xl font-bold sm:text-4xl">
-            기존 방식 vs ECDB
+            {t('why.title')}
           </h2>
         </div>
 
@@ -63,11 +66,11 @@ const WhySection = () => {
 
           <div className="mt-12 rounded-3xl border border-primary/30 bg-primary/5 p-8 text-center">
             <p className="font-display text-xl font-semibold text-primary sm:text-2xl">
-              ECDB = Market Intelligence + Partnership Targeting
+              {t('why.bottom.title')}
             </p>
             <p className="mt-2 text-muted-foreground">
-              <span className="inline-block">'시장 리서치 툴' 뿐만 아니라</span>{" "}
-              <span className="inline-block">'파트너십 & 세일즈 인텔리전스'로도 작동</span>
+              <span className="inline-block">{t('why.bottom.desc1')}</span>{" "}
+              <span className="inline-block">{t('why.bottom.desc2')}</span>
             </p>
           </div>
         </div>

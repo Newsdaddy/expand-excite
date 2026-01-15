@@ -1,15 +1,18 @@
 import { Check, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PricingSection = () => {
+  const { t, language } = useLanguage();
+
   const plans = [
     {
       name: "Corporate",
       price: "€810",
-      period: "/월",
-      description: "팀 최대 5명",
+      period: t('pricing.perMonth'),
+      description: t('pricing.corporate.desc'),
       features: [
-        "연간 데이터",
+        t('pricing.f1'),
         "Retailer Profiles",
         "Leads & Contacts",
         "Markets (Product Categories & Countries)",
@@ -21,10 +24,10 @@ const PricingSection = () => {
     {
       name: "Corporate+",
       price: "€1,050",
-      period: "/월",
-      description: "팀 최대 5명",
+      period: t('pricing.perMonth'),
+      description: t('pricing.corporatePlus.desc'),
       features: [
-        "연간 데이터 + 월간 데이터",
+        t('pricing.f2'),
         "Retailer Profiles",
         "Leads & Contacts",
         "Markets (Product Categories & Countries)",
@@ -35,17 +38,17 @@ const PricingSection = () => {
     },
     {
       name: "Enterprise",
-      price: "맞춤 가격",
+      price: t('pricing.enterprise.price'),
       period: "",
-      description: "전사 단위 접근",
+      description: t('pricing.enterprise.desc'),
       features: [
-        "연간 데이터",
+        t('pricing.f1'),
         "Retailer Profiles",
         "Leads & Contacts",
         "Markets (Product Categories & Countries)",
         "Transaction KPIs Reports",
         "Rankings",
-        "API 및 특별 분석 맞춤 솔루션",
+        t('pricing.f7'),
       ],
       highlighted: false,
     },
@@ -58,13 +61,13 @@ const PricingSection = () => {
       <div className="container relative mx-auto px-6">
         <div className="mx-auto max-w-3xl text-center">
           <span className="text-sm font-medium uppercase tracking-wider text-secondary">
-            Pricing
+            {t('pricing.label')}
           </span>
           <h2 className="mt-4 font-display text-3xl font-bold sm:text-4xl">
-            비즈니스에 맞는 플랜을 선택하세요
+            {t('pricing.title')}
           </h2>
           <p className="mt-4 text-muted-foreground">
-            *연간 결제 기준 · 신용카드 및 현금 송금 결제 가능
+            {t('pricing.note')}
           </p>
         </div>
 
@@ -82,7 +85,7 @@ const PricingSection = () => {
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                   <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
                     <Star className="h-3 w-3" />
-                    추천
+                    {t('pricing.recommended')}
                   </span>
                 </div>
               )}
@@ -110,7 +113,7 @@ const PricingSection = () => {
                 className="mt-8 w-full"
                 onClick={() => window.location.href = '#contact'}
               >
-                구독 상담하기
+                {t('pricing.consultBtn')}
               </Button>
             </div>
           ))}
@@ -118,7 +121,7 @@ const PricingSection = () => {
 
         <div className="mx-auto mt-12 max-w-2xl text-center">
           <p className="text-sm text-muted-foreground">
-            제공 데이터 상세 내용은{" "}
+            {t('pricing.detailPrefix')}{" "}
             <a
               href="https://ecdb.com/features"
               target="_blank"
@@ -126,8 +129,8 @@ const PricingSection = () => {
               className="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
             >
               ecdb.com/features
-            </a>
-            에서 확인하세요
+            </a>{" "}
+            {t('pricing.detailLink')}
           </p>
         </div>
       </div>
