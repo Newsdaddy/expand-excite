@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Database } from "lucide-react";
+import LanguageToggle from "@/components/LanguageToggle";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Header = () => {
+  const { t } = useLanguage();
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="container mx-auto flex h-16 items-center justify-between px-6">
@@ -16,25 +20,26 @@ const Header = () => {
         
         <nav className="hidden items-center gap-8 md:flex">
           <a href="#features" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Features
+            {t('nav.features')}
           </a>
           <a href="#solutions" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Solutions
+            {t('nav.solutions')}
           </a>
           <a href="#pricing" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Pricing
+            {t('nav.pricing')}
           </a>
           <a href="#why-ecdb" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-            Why ECDB
+            {t('nav.whyEcdb')}
           </a>
         </nav>
 
         <div className="flex items-center gap-3">
+          <LanguageToggle />
           <Button variant="ghost" size="sm">
-            로그인
+            {t('nav.login')}
           </Button>
           <Button variant="gold" size="sm">
-            상담하기
+            {t('nav.contact')}
           </Button>
         </div>
       </div>

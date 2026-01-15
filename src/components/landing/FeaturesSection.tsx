@@ -1,41 +1,44 @@
 import { BarChart2, Database, Download, Filter, LineChart, Users } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const FeaturesSection = () => {
+  const { t } = useLanguage();
+
   const features = [
     {
       icon: Database,
-      title: "Market & Platform Intelligence",
-      description: "50+ 글로벌 시장의 마켓플레이스, 온라인스토어 매출, 랭킹, 트래픽 데이터",
+      title: t('features.f1.title'),
+      description: t('features.f1.desc'),
       metrics: ["Revenue", "Traffic", "Market Share"],
     },
     {
       icon: BarChart2,
-      title: "Competitive Landscape",
-      description: "경쟁사 분석, 트랜잭션 KPI, 마케팅 분석으로 시장 구조 파악",
+      title: t('features.f2.title'),
+      description: t('features.f2.desc'),
       metrics: ["Competitor Analysis", "Transaction KPIs", "Marketing"],
     },
     {
       icon: LineChart,
-      title: "Growth Tracking",
-      description: "성장 중인 기업을 사전에 포착하여 선제적 영업 기회 확보",
+      title: t('features.f3.title'),
+      description: t('features.f3.desc'),
       metrics: ["Growth Rate", "Trend Analysis", "Alerts"],
     },
     {
       icon: Users,
-      title: "Lead Database",
-      description: "직함 기반 의사결정자 연락처 - Partnership, Ops, Strategy 리드",
+      title: t('features.f4.title'),
+      description: t('features.f4.desc'),
       metrics: ["100K+ Contacts", "Role-based", "Verified"],
     },
     {
       icon: Filter,
-      title: "Smart Filtering",
-      description: "국가, 플랫폼 유형, 성장 지표 기반 세일즈 우선순위 필터링",
+      title: t('features.f5.title'),
+      description: t('features.f5.desc'),
       metrics: ["Priority Score", "Custom Filters", "Saved Views"],
     },
     {
       icon: Download,
-      title: "Export & Integration",
-      description: "리드 Export, CRM 연계로 바로 영업에 활용",
+      title: t('features.f6.title'),
+      description: t('features.f6.desc'),
       metrics: ["CSV Export", "CRM Sync", "API Access"],
     },
   ];
@@ -45,17 +48,17 @@ const FeaturesSection = () => {
       <div className="container mx-auto px-6">
         <div className="mx-auto max-w-3xl text-center">
           <span className="text-sm font-medium uppercase tracking-wider text-primary">
-            Features
+            {t('features.label')}
           </span>
           <h2 className="mt-4 font-display text-3xl font-bold sm:text-4xl">
-            ECDB가 제공하는 것
+            {t('features.title')}
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            <span className="inline-block">❌ 무작위 데이터 수집 →</span>{" "}
-            <span className="inline-block">✅ 지금 반드시 알아야 할 커머스 기업 KPI와 리스트</span>
+            <span className="inline-block">{t('features.subtitle1')}</span>{" "}
+            <span className="inline-block">{t('features.subtitle2')}</span>
           </p>
           <p className="mt-3 text-sm text-muted-foreground">
-            제공 데이터 상세 내용은{" "}
+            {t('features.detailPrefix')}{" "}
             <a
               href="https://ecdb.com/features"
               target="_blank"
@@ -63,8 +66,8 @@ const FeaturesSection = () => {
               className="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
             >
               ecdb.com/features
-            </a>
-            에서 확인하세요
+            </a>{" "}
+            {t('features.detailLink')}
           </p>
         </div>
 

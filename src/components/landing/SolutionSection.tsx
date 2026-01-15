@@ -1,39 +1,42 @@
 import { BarChart3, Building2, Globe2, LineChart, Map, Users2 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const SolutionSection = () => {
+  const { t } = useLanguage();
+
   const track1Features = [
     {
       icon: Globe2,
-      title: "국가·지역 간 일관 비교",
-      description: "시장 규모, 성장률, 경쟁 밀도를 일관된 기준으로 비교",
+      title: t('solution.track1.f1.title'),
+      description: t('solution.track1.f1.desc'),
     },
     {
       icon: Map,
-      title: "플랫폼 구조 분석",
-      description: "카테고리 특성과 플랫폼별 진입 전략 도출",
+      title: t('solution.track1.f2.title'),
+      description: t('solution.track1.f2.desc'),
     },
     {
       icon: BarChart3,
-      title: "확장 우선순위",
-      description: "데이터 기반 시장 진입 우선순위 명확화",
+      title: t('solution.track1.f3.title'),
+      description: t('solution.track1.f3.desc'),
     },
   ];
 
   const track2Features = [
     {
       icon: LineChart,
-      title: "성장 기업 포착",
-      description: "지금 빠르게 성장 중인 마켓플레이스와 온라인스토어 식별",
+      title: t('solution.track2.f1.title'),
+      description: t('solution.track2.f1.desc'),
     },
     {
       icon: Building2,
-      title: "니즈 급증 기업",
-      description: "물류/결제 니즈가 급증하는 기업 선제 파악",
+      title: t('solution.track2.f2.title'),
+      description: t('solution.track2.f2.desc'),
     },
     {
       icon: Users2,
-      title: "의사결정자 리드",
-      description: "Partnership / Ops / Strategy 리드 직접 연결",
+      title: t('solution.track2.f3.title'),
+      description: t('solution.track2.f3.desc'),
     },
   ];
 
@@ -44,10 +47,10 @@ const SolutionSection = () => {
       <div className="container relative mx-auto px-6">
         <div className="mx-auto max-w-3xl text-center">
           <span className="text-sm font-medium uppercase tracking-wider text-primary">
-            Solution
+            {t('solution.label')}
           </span>
           <h2 className="mt-4 font-display text-3xl font-bold sm:text-4xl">
-            두 가지 트랙으로 완벽한 솔루션
+            {t('solution.title')}
           </h2>
         </div>
 
@@ -60,10 +63,10 @@ const SolutionSection = () => {
             </div>
             
             <h3 className="font-display text-2xl font-bold">
-              Expansion Decision Intelligence
+              {t('solution.track1.title')}
             </h3>
             <p className="mt-2 text-muted-foreground">
-              D2C 전략을 위한 의사결정 인텔리전스
+              {t('solution.track1.desc')}
             </p>
 
             <div className="mt-8 space-y-6">
@@ -89,10 +92,10 @@ const SolutionSection = () => {
             </div>
             
             <h3 className="font-display text-2xl font-bold">
-              Partnership & Sales Intelligence
+              {t('solution.track2.title')}
             </h3>
             <p className="mt-2 text-muted-foreground">
-              로지스틱/인프라 기업을 위한 파트너십 & 세일즈 리드
+              {t('solution.track2.desc')}
             </p>
 
             <div className="mt-8 space-y-6">
