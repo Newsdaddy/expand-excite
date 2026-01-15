@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, Gift, FileCheck, Users, ArrowRight } from "lucide-react";
+import managerPhoto from "@/assets/byeongjin-jeong.jpg";
 
 const ContactSection = () => {
   const benefits = [
@@ -62,6 +63,13 @@ const ContactSection = () => {
             </div>
 
             <div className="mt-10 rounded-2xl border border-primary/30 bg-primary/5 p-6 text-center">
+              <div className="mx-auto mb-4 h-24 w-24 overflow-hidden rounded-full border-2 border-primary/50 shadow-lg">
+                <img 
+                  src={managerPhoto} 
+                  alt="Byeongjin Jeong - APAC Country Manager" 
+                  className="h-full w-full object-cover"
+                />
+              </div>
               <p className="text-sm text-muted-foreground">담당 매니저</p>
               <p className="mt-1 font-display text-xl font-bold">Byeongjin Jeong</p>
               <p className="text-sm text-primary">APAC Country Manager</p>
