@@ -1,47 +1,36 @@
 import { BarChart3, Building2, Globe2, LineChart, Map, Users2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-
 const SolutionSection = () => {
-  const { t } = useLanguage();
-
-  const track1Features = [
-    {
-      icon: Globe2,
-      title: t('solution.track1.f1.title'),
-      description: t('solution.track1.f1.desc'),
-    },
-    {
-      icon: Map,
-      title: t('solution.track1.f2.title'),
-      description: t('solution.track1.f2.desc'),
-    },
-    {
-      icon: BarChart3,
-      title: t('solution.track1.f3.title'),
-      description: t('solution.track1.f3.desc'),
-    },
-  ];
-
-  const track2Features = [
-    {
-      icon: LineChart,
-      title: t('solution.track2.f1.title'),
-      description: t('solution.track2.f1.desc'),
-    },
-    {
-      icon: Building2,
-      title: t('solution.track2.f2.title'),
-      description: t('solution.track2.f2.desc'),
-    },
-    {
-      icon: Users2,
-      title: t('solution.track2.f3.title'),
-      description: t('solution.track2.f3.desc'),
-    },
-  ];
-
-  return (
-    <section id="solutions" className="relative py-24">
+  const {
+    t
+  } = useLanguage();
+  const track1Features = [{
+    icon: Globe2,
+    title: t('solution.track1.f1.title'),
+    description: t('solution.track1.f1.desc')
+  }, {
+    icon: Map,
+    title: t('solution.track1.f2.title'),
+    description: t('solution.track1.f2.desc')
+  }, {
+    icon: BarChart3,
+    title: t('solution.track1.f3.title'),
+    description: t('solution.track1.f3.desc')
+  }];
+  const track2Features = [{
+    icon: LineChart,
+    title: t('solution.track2.f1.title'),
+    description: t('solution.track2.f1.desc')
+  }, {
+    icon: Building2,
+    title: t('solution.track2.f2.title'),
+    description: t('solution.track2.f2.desc')
+  }, {
+    icon: Users2,
+    title: t('solution.track2.f3.title'),
+    description: t('solution.track2.f3.desc')
+  }];
+  return <section id="solutions" className="relative py-24">
       <div className="absolute inset-0 bg-grid-pattern opacity-20" />
       
       <div className="container relative mx-auto px-6">
@@ -59,7 +48,7 @@ const SolutionSection = () => {
           <div className="card-elevated rounded-3xl border border-border/50 p-8">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
               <span className="h-2 w-2 rounded-full bg-primary" />
-              <span className="text-sm font-medium text-primary">Track 1</span>
+              <span className="text-sm font-medium text-primary"> Use case 1</span>
             </div>
             
             <h3 className="font-display text-2xl font-bold">
@@ -70,8 +59,7 @@ const SolutionSection = () => {
             </p>
 
             <div className="mt-8 space-y-6">
-              {track1Features.map((feature, index) => (
-                <div key={index} className="flex items-start gap-4">
+              {track1Features.map((feature, index) => <div key={index} className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                     <feature.icon className="h-5 w-5 text-primary" />
                   </div>
@@ -79,8 +67,7 @@ const SolutionSection = () => {
                     <h4 className="font-medium">{feature.title}</h4>
                     <p className="mt-1 text-sm text-muted-foreground">{feature.description}</p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
 
@@ -88,7 +75,7 @@ const SolutionSection = () => {
           <div className="card-elevated rounded-3xl border border-secondary/30 p-8">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-secondary/10 px-4 py-2">
               <span className="h-2 w-2 rounded-full bg-secondary" />
-              <span className="text-sm font-medium text-secondary">Track 2</span>
+              <span className="text-sm font-medium text-secondary">Use case 2</span>
             </div>
             
             <h3 className="font-display text-2xl font-bold">
@@ -99,8 +86,7 @@ const SolutionSection = () => {
             </p>
 
             <div className="mt-8 space-y-6">
-              {track2Features.map((feature, index) => (
-                <div key={index} className="flex items-start gap-4">
+              {track2Features.map((feature, index) => <div key={index} className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary/10">
                     <feature.icon className="h-5 w-5 text-secondary" />
                   </div>
@@ -108,14 +94,11 @@ const SolutionSection = () => {
                     <h4 className="font-medium">{feature.title}</h4>
                     <p className="mt-1 text-sm text-muted-foreground">{feature.description}</p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default SolutionSection;
