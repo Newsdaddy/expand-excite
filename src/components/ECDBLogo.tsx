@@ -12,12 +12,9 @@ const ECDBLogo = ({ className = "", size = "md" }: ECDBLogoProps) => {
 
   return (
     <div className={`flex items-center ${className}`}>
-      <span className={`font-display font-bold tracking-tight ${sizeClasses[size]}`}>
-        <span className="relative">
-          EC
-          <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#00dc82] rounded-full" />
-        </span>
-        <span>DB</span>
+      <span className={`font-display font-bold tracking-tight ${sizeClasses[size]} relative`}>
+        ECDB
+        <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#00dc82] rounded-full" />
       </span>
     </div>
   );
