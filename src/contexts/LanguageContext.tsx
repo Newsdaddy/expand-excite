@@ -151,7 +151,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.successDesc': '담당 매니저가 빠른 시일 내에 연락드리겠습니다.',
     
     // CTA Section
-    'cta.title1': '이번 분기 영업에',
+    'cta.title1': '이번 분기 전략에',
     'cta.title2': '바로 쓰는 툴',
     'cta.desc1': 'APAC 본사 기업과 로지스틱/커머스 인프라 기업이',
     'cta.desc2': '글로벌 이커머스 시장에서 데이터로 결정하게 만드는',
@@ -311,7 +311,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.successDesc': 'Our manager will contact you shortly.',
     
     // CTA Section
-    'cta.title1': 'Ready for This Quarter',
+    'cta.title1': 'Ready for This Quarter Strategy',
     'cta.title2': 'Sales Tool',
     'cta.desc1': 'For APAC headquarters and logistics/commerce infrastructure companies',
     'cta.desc2': 'making data-driven decisions in the global eCommerce market',
