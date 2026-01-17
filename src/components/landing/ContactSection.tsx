@@ -2,15 +2,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Calendar, Gift, FileCheck, Users, Send } from "lucide-react";
+import { Gift, FileCheck, Users, Send } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useUtmParams } from "@/hooks/useUtmParams";
+import { supabase } from "@/integrations/supabase/client";
 import managerPhoto from "@/assets/byeongjin-jeong.jpg";
 
 const ContactSection = () => {
   const { toast } = useToast();
   const { t } = useLanguage();
+  const utmParams = useUtmParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -24,16 +27,41 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: t('contact.form.success'),
-      description: t('contact.form.successDesc'),
-    });
-    
-    setFormData({ name: "", company: "", email: "", phone: "", message: "" });
-    setIsSubmitting(false);
+    try {
+      const { error } = await supabase
+        .from("consultation_requests")
+        .insert({
+          name: formData.name.trim(),
+          company: formData.company.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim() || null,
+          message: formData.message.trim(),
+          source: "landing_page",
+          utm_source: utmParams.utm_source,
+          utm_medium: utmParams.utm_medium,
+          utm_campaign: utmParams.utm_campaign,
+          utm_term: utmParams.utm_term,
+          utm_content: utmParams.utm_content,
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: t('contact.form.success'),
+        description: t('contact.form.successDesc'),
+      });
+      
+      setFormData({ name: "", company: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      console.error("Error submitting consultation request:", error);
+      toast({
+        title: t('contact.form.error') || "오류가 발생했습니다",
+        description: t('contact.form.errorDesc') || "잠시 후 다시 시도해주세요.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
