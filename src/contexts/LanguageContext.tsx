@@ -22,7 +22,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.badge': 'APAC 기업을 위한 글로벌 커머스 인텔리전스',
     'hero.title1': '글로벌 이커머스',
     'hero.title2': '마켓 인텔리전스',
-    'hero.title3': '종합솔루션',
+    'hero.title3': '전략 수립 솔루션',
     'hero.sub1': '어디에 진출할지',
     'hero.sub2': '어떤 플랫폼과 협업할지',
     'hero.sub3': '누구에게 먼저 영업할지',
