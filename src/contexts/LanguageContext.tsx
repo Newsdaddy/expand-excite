@@ -20,7 +20,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero
     'hero.badge': 'APAC 기업을 위한 글로벌 커머스 인텔리전스',
-    'hero.title1': '글로벌 이커머스 시장의',
+    'hero.title1': '글로벌 이커머스',
     'hero.title2': '의사결정 + 세일즈',
     'hero.title3': '종합솔루션',
     'hero.sub1': '어디에 진출할지',
