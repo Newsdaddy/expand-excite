@@ -116,7 +116,7 @@ const translations: Record<Language, Record<string, string>> = {
     'why.new3': "'왜 이 회사인가'가 설명된다",
     'why.bottom.title': 'ECDB = Market Intelligence + Partnership Targeting',
     'why.bottom.desc1': "'시장 리서치 툴' 뿐만 아니라",
-    'why.bottom.desc2': "'파트너십 & 세일즈 인텔리전스'로도 작동",
+    'why.bottom.desc2': "'파트너십 & 세일즈 인텔리전스'로도 활용",
     
     // Contact Section
     'contact.label': 'Dedicated Manager',
