@@ -8,9 +8,10 @@ import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useUtmParams } from "@/hooks/useUtmParams";
 import { useRateLimiter } from "@/hooks/useRateLimiter";
-import { supabase } from "@/integrations/supabase/client";
 import { contactFormSchema, utmParamsSchema } from "@/lib/validations/contactForm";
 import managerPhoto from "@/assets/byeongjin-jeong.jpg";
+
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -79,23 +80,44 @@ const ContactSection = () => {
     }
 
     try {
-      const { error } = await supabase
-        .from("consultation_requests")
-        .insert({
+      // Use server-side edge function for secure, rate-limited submission
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/submit-consultation`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
           name: formResult.data.name,
           company: formResult.data.company,
           email: formResult.data.email,
           phone: formResult.data.phone || null,
           message: formResult.data.message,
-          source: "landing_page",
           utm_source: safeUtmParams.utm_source,
           utm_medium: safeUtmParams.utm_medium,
           utm_campaign: safeUtmParams.utm_campaign,
           utm_term: safeUtmParams.utm_term,
           utm_content: safeUtmParams.utm_content,
-        });
+        }),
+      });
 
-      if (error) throw error;
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        
+        // Handle rate limit error from server
+        if (response.status === 429) {
+          const retryAfter = errorData.retryAfter || 300;
+          const minutes = Math.ceil(retryAfter / 60);
+          toast({
+            title: "잠시 후 다시 시도해주세요",
+            description: `${minutes}분 후에 다시 제출할 수 있습니다.`,
+            variant: "destructive",
+          });
+          setIsSubmitting(false);
+          return;
+        }
+        
+        throw new Error(errorData.error || "Submission failed");
+      }
 
       toast({
         title: t('contact.form.success'),
@@ -104,7 +126,10 @@ const ContactSection = () => {
 
       setFormData({ name: "", company: "", email: "", phone: "", message: "" });
     } catch (error) {
-      console.error("Error submitting consultation request:", error);
+      // Only log errors in development to prevent info leakage
+      if (import.meta.env.DEV) {
+        console.error("Error submitting consultation request:", error);
+      }
       toast({
         title: t('contact.form.error') || "오류가 발생했습니다",
         description: t('contact.form.errorDesc') || "잠시 후 다시 시도해주세요.",
