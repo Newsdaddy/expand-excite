@@ -72,7 +72,7 @@ const translations: Record<Language, Record<string, string>> = {
     'features.label': 'Features',
     'features.title': 'ECDB가 제공하는 것',
     'features.subtitle1': '❌ 무작위 데이터 수집 →',
-    'features.subtitle2': '✅ 지금 반드시 알아야 할 커머스 기업 KPI와 리스트',
+    'features.subtitle2': '✅ 마스터카드 등 결제 기업 제공 데이터',
     'features.detailLink': '에서 확인하세요',
     'features.detailPrefix': '제공 데이터 상세 내용은',
     'features.f1.title': 'Market & Platform Intelligence',
