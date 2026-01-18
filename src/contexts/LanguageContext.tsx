@@ -50,7 +50,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Solution Section
     'solution.label': 'Solution',
-    'solution.title': '두 가지 트랙으로 완벽한 솔루션',
+    'solution.title': '어느 쪽에 해당하시나요?',
     'solution.track1.title': 'Expansion Decision Intelligence',
     'solution.track1.desc': 'D2C 전략을 위한 의사결정 인텔리전스',
     'solution.track1.f1.title': '국가·지역 간 일관 비교',
