@@ -55,8 +55,8 @@ const PricingSection = () => {
   ];
 
   return (
-    <section id="pricing" className="relative py-24">
-      <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+    <section id="pricing" className="relative py-24 bg-white">
+      {/* Removed dark grid pattern */}
       
       <div className="container relative mx-auto px-6">
         <div className="mx-auto max-w-3xl text-center">
@@ -77,13 +77,13 @@ const PricingSection = () => {
               key={index}
               className={`relative rounded-3xl border p-8 transition-all duration-300 ${
                 plan.highlighted
-                  ? "border-secondary bg-secondary/5 shadow-lg shadow-secondary/10"
-                  : "border-border/50 bg-card/50"
+                  ? "border-primary bg-primary/5 shadow-md"
+                  : "border-gray-200 bg-white shadow-sm"
               }`}
             >
               {plan.highlighted && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-medium text-white">
                     <Star className="h-3 w-3" />
                     {t('pricing.recommended')}
                   </span>

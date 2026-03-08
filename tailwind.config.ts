@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Space Grotesk', 'sans-serif'],
+        sans: ['Open Sans', 'Noto Sans KR', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Open Sans', 'Noto Sans KR', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -61,14 +61,16 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // ECDB Teal for CTA buttons
         gold: {
-          DEFAULT: "hsl(43 96% 56%)",
-          dark: "hsl(35 91% 50%)",
+          DEFAULT: "hsl(166 76% 43%)",
+          dark: "hsl(166 76% 38%)",
         },
+        // Navy for text
         navy: {
-          DEFAULT: "hsl(222 47% 6%)",
-          light: "hsl(222 47% 12%)",
-          muted: "hsl(222 30% 15%)",
+          DEFAULT: "hsl(222 47% 11%)",
+          light: "hsl(222 30% 30%)",
+          muted: "hsl(220 9% 46%)",
         },
       },
       borderRadius: {

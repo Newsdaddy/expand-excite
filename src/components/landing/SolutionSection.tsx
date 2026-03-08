@@ -30,8 +30,8 @@ const SolutionSection = () => {
     title: t('solution.track2.f3.title'),
     description: t('solution.track2.f3.desc')
   }];
-  return <section id="solutions" className="relative py-24">
-      <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+  return <section id="solutions" className="relative py-24 bg-white">
+      {/* Removed dark grid pattern */}
       
       <div className="container relative mx-auto px-6">
         <div className="mx-auto max-w-3xl text-center">
@@ -45,7 +45,7 @@ const SolutionSection = () => {
 
         <div className="mt-16 grid gap-8 lg:grid-cols-2">
           {/* Track 1 */}
-          <div className="card-elevated rounded-3xl border border-border/50 p-8">
+          <div className="bg-white rounded-3xl border border-gray-200 p-8 shadow-sm">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
               <span className="h-2 w-2 rounded-full bg-primary" />
               <span className="text-sm font-medium text-primary"> Use case 1</span>
@@ -72,7 +72,7 @@ const SolutionSection = () => {
           </div>
 
           {/* Track 2 */}
-          <div className="card-elevated rounded-3xl border border-secondary/30 p-8">
+          <div className="bg-white rounded-3xl border border-gray-200 p-8 shadow-sm">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-secondary/10 px-4 py-2">
               <span className="h-2 w-2 rounded-full bg-secondary" />
               <span className="text-sm font-medium text-secondary">Use case 2</span>

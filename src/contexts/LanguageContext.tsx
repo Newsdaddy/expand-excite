@@ -11,11 +11,14 @@ interface LanguageContextType {
 const translations: Record<Language, Record<string, string>> = {
   ko: {
     // Header
+    'nav.sales': '솔루션 소개',
+    'nav.resources': '무료 자료',
+    'nav.login': '로그인',
+    'nav.webinar': '웨비나 신청',
     'nav.features': 'Features',
     'nav.solutions': 'Solutions',
     'nav.pricing': 'Pricing',
     'nav.whyEcdb': 'Why ECDB',
-    'nav.login': '로그인',
     'nav.contact': '상담하기',
     
     // Hero
@@ -124,7 +127,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.subtitle1': '정병진 매니저를 통해 계약 시',
     'contact.subtitle2': '첫 계약 기업 단독 혜택이 적용됩니다',
     'contact.name': 'Byeongjin Jeong',
-    'contact.role': 'APAC Country Manager',
+    'contact.role': 'APAC Country Lead',
     'contact.benefit1.title': '기업 맞춤 컨설팅',
     'contact.benefit1.desc': '귀사의 비즈니스에 맞는 맞춤형 솔루션 제안',
     'contact.benefit2.title': '계약 프로세스 밀착 관리',
@@ -171,11 +174,14 @@ const translations: Record<Language, Record<string, string>> = {
   },
   en: {
     // Header
+    'nav.sales': 'Solutions',
+    'nav.resources': 'Resources',
+    'nav.login': 'Login',
+    'nav.webinar': 'Register Webinar',
     'nav.features': 'Features',
     'nav.solutions': 'Solutions',
     'nav.pricing': 'Pricing',
     'nav.whyEcdb': 'Why ECDB',
-    'nav.login': 'Login',
     'nav.contact': 'Contact Us',
 
     // Hero
@@ -284,7 +290,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.subtitle1': 'When you sign up through Manager Byeongjin Jeong,',
     'contact.subtitle2': 'exclusive first-contract benefits apply',
     'contact.name': 'Byeongjin Jeong',
-    'contact.role': 'APAC Country Manager',
+    'contact.role': 'APAC Country Lead',
     'contact.benefit1.title': 'Tailored Consulting',
     'contact.benefit1.desc': 'Customized solutions tailored to your business',
     'contact.benefit2.title': 'Dedicated Contract Process Management',
