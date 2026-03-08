@@ -41,7 +41,7 @@ const Header = () => {
               </Link>
             ))}
             <a
-              href="https://ecdb.com"
+              href="https://ecdb.com/about-us"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-colors flex items-center gap-1.5"
@@ -89,7 +89,7 @@ const Header = () => {
                   </Link>
                 ))}
                 <a
-                  href="https://ecdb.com"
+                  href="https://ecdb.com/about-us"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsOpen(false)}
