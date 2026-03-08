@@ -146,7 +146,7 @@ const SolutionDetailSection = () => {
   const [activeFeature, setActiveFeature] = useState(features[0]);
 
   return (
-    <section id="features-detail" className="py-20 bg-background">
+    <section id="features-detail" className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
@@ -159,15 +159,15 @@ const SolutionDetailSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             {isKo ? (
               <>
-                <span className="text-muted-foreground">10억+ 트랜잭션 기반</span>
+                <span className="text-gray-600">10억+ 트랜잭션 기반</span>
                 <br />
-                <span className="text-primary">프리미엄 이커머스 인텔리전스</span>
+                <span className="text-gray-900">프리미엄 이커머스 인텔리전스</span>
               </>
             ) : (
               <>
-                <span className="text-muted-foreground">Built on 1B+ Transactions</span>
+                <span className="text-gray-600">Built on 1B+ Transactions</span>
                 <br />
-                <span className="text-primary">Premium Ecommerce Intelligence</span>
+                <span className="text-gray-900">Premium Ecommerce Intelligence</span>
               </>
             )}
           </h2>

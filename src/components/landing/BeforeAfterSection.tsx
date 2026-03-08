@@ -52,7 +52,7 @@ const BeforeAfterSection = () => {
   const isKo = language === 'ko';
 
   return (
-    <section id="solution" className="py-20 bg-muted/30">
+    <section id="solution" className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -78,7 +78,7 @@ const BeforeAfterSection = () => {
             {comparisons.map((item, index) => (
               <div
                 key={index}
-                className="bg-card border border-border/50 rounded-xl p-6 hover:border-primary/30 transition-colors"
+                className="bg-white border border-gray-200 rounded-xl p-6 hover:border-primary/50 transition-colors shadow-sm"
               >
                 <div className="grid md:grid-cols-[1fr,auto,1fr] gap-4 items-center">
                   {/* Before */}
@@ -122,7 +122,7 @@ const BeforeAfterSection = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20 rounded-xl p-6"
+              className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm"
             >
               <blockquote className="text-lg mb-4">
                 "{isKo ? testimonial.quoteKo : testimonial.quoteEn}"

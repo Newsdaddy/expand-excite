@@ -72,10 +72,9 @@ const PainPointHero = () => {
   const isKo = language === 'ko';
 
   return (
-    <section className="relative pt-24 pb-20 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-primary/5" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
+    <section className="relative pt-24 pb-20 overflow-hidden bg-white">
+      {/* Background - subtle gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
 
       <div className="container relative mx-auto px-6">
         {/* Badge */}
@@ -89,11 +88,11 @@ const PainPointHero = () => {
 
         {/* Main Title */}
         <h1 className="text-center text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-          <span className="text-muted-foreground">
+          <span className="text-gray-600">
             {isKo ? "혹시 이런 고민," : "Do you face"}
           </span>
           <br />
-          <span className="bg-gradient-to-r from-primary via-cyan-400 to-primary bg-clip-text text-transparent">
+          <span className="text-gray-900">
             {isKo ? "하고 계시진 않나요?" : "these challenges?"}
           </span>
         </h1>
@@ -109,8 +108,8 @@ const PainPointHero = () => {
                 onClick={() => setActivePersona(persona)}
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all ${
                   isActive
-                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
-                    : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+                    ? "bg-primary text-white"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900"
                 }`}
               >
                 <Icon className="h-4 w-4" />
@@ -122,7 +121,7 @@ const PainPointHero = () => {
 
         {/* Pain Point Card */}
         <div className="max-w-3xl mx-auto">
-          <div className="relative bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-8 md:p-10">
+          <div className="relative bg-white border border-gray-200 rounded-2xl p-8 md:p-10 shadow-sm">
             {/* Pain Point */}
             <div className="mb-8">
               <p className="text-sm text-muted-foreground mb-2">
@@ -172,7 +171,7 @@ const PainPointHero = () => {
         </div>
 
         {/* Stats */}
-        <div className="flex flex-wrap justify-center gap-8 md:gap-16 mt-16 pt-10 border-t border-border/50">
+        <div className="flex flex-wrap justify-center gap-8 md:gap-16 mt-16 pt-10 border-t border-gray-200">
           <div className="text-center">
             <p className="text-3xl md:text-4xl font-bold text-primary">150+</p>
             <p className="text-sm text-muted-foreground mt-1">

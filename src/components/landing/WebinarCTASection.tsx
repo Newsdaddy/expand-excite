@@ -56,7 +56,7 @@ const WebinarCTASection = () => {
   ];
 
   return (
-    <section id="webinar" className="py-20 bg-gradient-to-b from-background to-primary/5">
+    <section id="webinar" className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -113,7 +113,7 @@ const WebinarCTASection = () => {
               </div>
 
               {/* Manager Info */}
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border/50">
+              <div className="flex items-center gap-4 p-4 rounded-xl bg-white border border-gray-200 shadow-sm">
                 <img
                   src={profileImage}
                   alt="Byeongjin Jeong"
@@ -127,7 +127,7 @@ const WebinarCTASection = () => {
             </div>
 
             {/* Right: Form */}
-            <div className="bg-card border border-border/50 rounded-2xl p-8">
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
               {isSubmitted ? (
                 <div className="text-center py-12">
                   <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-6">

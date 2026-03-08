@@ -92,7 +92,7 @@ const ROISection = () => {
   const isKo = language === "ko";
 
   return (
-    <section id="roi" className="py-20 bg-gradient-to-b from-background to-muted/30">
+    <section id="roi" className="py-20 bg-white">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
@@ -105,13 +105,13 @@ const ROISection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             {isKo ? (
               <>
-                <span className="text-muted-foreground">투자 대비</span>{" "}
-                <span className="text-primary">확실한 수익</span>
+                <span className="text-gray-600">투자 대비</span>{" "}
+                <span className="text-gray-900">확실한 수익</span>
               </>
             ) : (
               <>
-                <span className="text-muted-foreground">Clear Returns on</span>{" "}
-                <span className="text-primary">Your Investment</span>
+                <span className="text-gray-600">Clear Returns on</span>{" "}
+                <span className="text-gray-900">Your Investment</span>
               </>
             )}
           </h2>
@@ -129,7 +129,7 @@ const ROISection = () => {
             return (
               <div
                 key={index}
-                className="relative bg-card border border-border/50 rounded-2xl p-6 text-center group hover:border-primary/30 transition-all"
+                className="relative bg-white border border-gray-200 rounded-2xl p-6 text-center group hover:border-primary/50 transition-all shadow-sm"
               >
                 <div
                   className={`w-14 h-14 rounded-xl bg-gradient-to-br ${metric.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}
