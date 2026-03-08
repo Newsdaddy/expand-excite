@@ -11,11 +11,14 @@ interface LanguageContextType {
 const translations: Record<Language, Record<string, string>> = {
   ko: {
     // Header
+    'nav.sales': '솔루션 소개',
+    'nav.resources': '무료 자료',
+    'nav.login': '로그인',
+    'nav.webinar': '웨비나 신청',
     'nav.features': 'Features',
     'nav.solutions': 'Solutions',
     'nav.pricing': 'Pricing',
     'nav.whyEcdb': 'Why ECDB',
-    'nav.login': '로그인',
     'nav.contact': '상담하기',
     
     // Hero
@@ -171,11 +174,14 @@ const translations: Record<Language, Record<string, string>> = {
   },
   en: {
     // Header
+    'nav.sales': 'Solutions',
+    'nav.resources': 'Resources',
+    'nav.login': 'Login',
+    'nav.webinar': 'Register Webinar',
     'nav.features': 'Features',
     'nav.solutions': 'Solutions',
     'nav.pricing': 'Pricing',
     'nav.whyEcdb': 'Why ECDB',
-    'nav.login': 'Login',
     'nav.contact': 'Contact Us',
 
     // Hero

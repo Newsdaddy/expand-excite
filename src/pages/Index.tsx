@@ -1,12 +1,10 @@
 import Header from "@/components/landing/Header";
-import HeroSection from "@/components/landing/HeroSection";
-import ProblemSection from "@/components/landing/ProblemSection";
+import PainPointHero from "@/components/landing/PainPointHero";
+import BeforeAfterSection from "@/components/landing/BeforeAfterSection";
 import SolutionSection from "@/components/landing/SolutionSection";
 import FeaturesSection from "@/components/landing/FeaturesSection";
 import PricingSection from "@/components/landing/PricingSection";
-import WhySection from "@/components/landing/WhySection";
-import ContactSection from "@/components/landing/ContactSection";
-import CTASection from "@/components/landing/CTASection";
+import WebinarCTASection from "@/components/landing/WebinarCTASection";
 import Footer from "@/components/landing/Footer";
 
 const Index = () => {
@@ -14,14 +12,23 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        <HeroSection />
-        <ProblemSection />
+        {/* Pain Point Hero - "어? 내 문제네?" */}
+        <PainPointHero />
+
+        {/* Before/After - "오? 이게 되네?" */}
+        <BeforeAfterSection />
+
+        {/* Solution Overview */}
         <SolutionSection />
+
+        {/* Features - ECDB 상세 기능 */}
         <FeaturesSection />
+
+        {/* Pricing */}
         <PricingSection />
-        <WhySection />
-        <ContactSection />
-        <CTASection />
+
+        {/* Webinar CTA */}
+        <WebinarCTASection />
       </main>
       <Footer />
     </div>
