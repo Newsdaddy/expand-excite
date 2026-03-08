@@ -1,67 +1,79 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createHash } from "https://deno.land/std@0.208.0/crypto/mod.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
-
-// In-memory rate limit store (resets on function cold start, but provides protection during active periods)
-// For production at scale, consider using Redis or a database table
-const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 
 const RATE_LIMIT = {
-  maxRequests: 5,          // Max requests per window
-  windowMs: 60 * 60 * 1000, // 1 hour window
+  maxRequests: 5,
+  windowMs: 60 * 60 * 1000, // 1 hour
 };
 
-function getRateLimitKey(ip: string): string {
-  return `rate_limit:${ip}`;
+function hashIP(ip: string): string {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(ip + (Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "salt"));
+  const hashBuffer = new Uint8Array(32);
+  // Use a simple hash for IP anonymization
+  let hash = 0;
+  for (let i = 0; i < data.length; i++) {
+    hash = ((hash << 5) - hash + data[i]) | 0;
+  }
+  return Math.abs(hash).toString(36);
 }
 
-function checkRateLimit(ip: string): { allowed: boolean; remaining: number; resetIn: number } {
-  const now = Date.now();
-  const key = getRateLimitKey(ip);
-  const record = rateLimitStore.get(key);
+async function checkRateLimit(
+  supabase: ReturnType<typeof createClient>,
+  ip: string
+): Promise<{ allowed: boolean; remaining: number; resetIn: number }> {
+  const ipHash = hashIP(ip);
+  const now = new Date();
+  const windowStart = new Date(now.getTime() - RATE_LIMIT.windowMs);
 
-  // Clean up expired entries
-  if (record && now > record.resetTime) {
-    rateLimitStore.delete(key);
-  }
+  // Clean expired entries and get current count in one go
+  await supabase
+    .from("rate_limits")
+    .delete()
+    .lt("window_start", windowStart.toISOString());
 
-  const currentRecord = rateLimitStore.get(key);
+  const { data: existing } = await supabase
+    .from("rate_limits")
+    .select("count, window_start")
+    .eq("ip_hash", ipHash)
+    .single();
 
-  if (!currentRecord) {
-    // First request from this IP
-    rateLimitStore.set(key, {
-      count: 1,
-      resetTime: now + RATE_LIMIT.windowMs,
-    });
+  if (!existing) {
+    // First request
+    await supabase
+      .from("rate_limits")
+      .insert({ ip_hash: ipHash, count: 1, window_start: now.toISOString() });
     return { allowed: true, remaining: RATE_LIMIT.maxRequests - 1, resetIn: RATE_LIMIT.windowMs };
   }
 
-  if (currentRecord.count >= RATE_LIMIT.maxRequests) {
-    return { 
-      allowed: false, 
-      remaining: 0, 
-      resetIn: currentRecord.resetTime - now 
-    };
+  if (existing.count >= RATE_LIMIT.maxRequests) {
+    const resetTime = new Date(existing.window_start).getTime() + RATE_LIMIT.windowMs;
+    return { allowed: false, remaining: 0, resetIn: Math.max(0, resetTime - now.getTime()) };
   }
 
-  // Increment count
-  currentRecord.count++;
-  rateLimitStore.set(key, currentRecord);
+  // Increment
+  await supabase
+    .from("rate_limits")
+    .update({ count: existing.count + 1 })
+    .eq("ip_hash", ipHash);
 
-  return { 
-    allowed: true, 
-    remaining: RATE_LIMIT.maxRequests - currentRecord.count, 
-    resetIn: currentRecord.resetTime - now 
+  const resetTime = new Date(existing.window_start).getTime() + RATE_LIMIT.windowMs;
+  return {
+    allowed: true,
+    remaining: RATE_LIMIT.maxRequests - (existing.count + 1),
+    resetIn: Math.max(0, resetTime - now.getTime()),
   };
 }
 
 // Input validation
-function validateInput(data: unknown): { 
-  valid: boolean; 
-  errors: string[]; 
+function validateInput(data: unknown): {
+  valid: boolean;
+  errors: string[];
   sanitized?: {
     name: string;
     company: string;
@@ -73,29 +85,25 @@ function validateInput(data: unknown): {
     utm_campaign: string | null;
     utm_term: string | null;
     utm_content: string | null;
-  } 
+  };
 } {
   const errors: string[] = [];
-  
-  if (!data || typeof data !== 'object') {
-    return { valid: false, errors: ['Invalid request body'] };
+
+  if (!data || typeof data !== "object") {
+    return { valid: false, errors: ["Invalid request body"] };
   }
 
   const body = data as Record<string, unknown>;
 
-  // Required fields
-  const name = typeof body.name === 'string' ? body.name.trim() : '';
-  const company = typeof body.company === 'string' ? body.company.trim() : '';
-  const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
-  const message = typeof body.message === 'string' ? body.message.trim() : '';
-  
-  // Optional fields
-  const phone = typeof body.phone === 'string' && body.phone.trim() ? body.phone.trim() : null;
-  
-  // UTM params (optional)
+  const name = typeof body.name === "string" ? body.name.trim() : "";
+  const company = typeof body.company === "string" ? body.company.trim() : "";
+  const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+  const message = typeof body.message === "string" ? body.message.trim() : "";
+  const phone = typeof body.phone === "string" && body.phone.trim() ? body.phone.trim() : null;
+
   const utmParamRegex = /^[a-zA-Z0-9_-]*$/;
   const sanitizeUtm = (val: unknown): string | null => {
-    if (typeof val !== 'string' || !val.trim()) return null;
+    if (typeof val !== "string" || !val.trim()) return null;
     const trimmed = val.trim().slice(0, 100);
     return utmParamRegex.test(trimmed) ? trimmed : null;
   };
@@ -106,69 +114,33 @@ function validateInput(data: unknown): {
   const utm_term = sanitizeUtm(body.utm_term);
   const utm_content = sanitizeUtm(body.utm_content);
 
-  // Validation rules
-  if (!name || name.length < 2) {
-    errors.push('Name must be at least 2 characters');
-  }
-  if (name.length > 100) {
-    errors.push('Name must be less than 100 characters');
-  }
+  if (!name || name.length < 2) errors.push("Name must be at least 2 characters");
+  if (name.length > 100) errors.push("Name must be less than 100 characters");
+  if (!company || company.length < 2) errors.push("Company must be at least 2 characters");
+  if (company.length > 200) errors.push("Company must be less than 200 characters");
 
-  if (!company || company.length < 2) {
-    errors.push('Company must be at least 2 characters');
-  }
-  if (company.length > 200) {
-    errors.push('Company must be less than 200 characters');
-  }
-
-  // Email validation
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (!email || !emailRegex.test(email)) {
-    errors.push('Please provide a valid email address');
-  }
-  if (email.length > 255) {
-    errors.push('Email must be less than 255 characters');
-  }
+  if (!email || !emailRegex.test(email)) errors.push("Please provide a valid email address");
+  if (email.length > 255) errors.push("Email must be less than 255 characters");
 
-  // Phone validation (optional)
   if (phone) {
     const phoneRegex = /^[0-9+\-() ]{6,20}$/;
-    if (!phoneRegex.test(phone)) {
-      errors.push('Please provide a valid phone number');
-    }
+    if (!phoneRegex.test(phone)) errors.push("Please provide a valid phone number");
   }
 
-  if (!message || message.length < 10) {
-    errors.push('Message must be at least 10 characters');
-  }
-  if (message.length > 2000) {
-    errors.push('Message must be less than 2000 characters');
-  }
+  if (!message || message.length < 10) errors.push("Message must be at least 10 characters");
+  if (message.length > 2000) errors.push("Message must be less than 2000 characters");
 
-  if (errors.length > 0) {
-    return { valid: false, errors };
-  }
+  if (errors.length > 0) return { valid: false, errors };
 
   return {
     valid: true,
     errors: [],
-    sanitized: {
-      name,
-      company,
-      email,
-      phone,
-      message,
-      utm_source,
-      utm_medium,
-      utm_campaign,
-      utm_term,
-      utm_content,
-    },
+    sanitized: { name, company, email, phone, message, utm_source, utm_medium, utm_campaign, utm_term, utm_content },
   };
 }
 
 Deno.serve(async (req) => {
-  // Handle CORS preflight
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -181,31 +153,44 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // Get client IP for rate limiting
-    const clientIP = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || 
-                     req.headers.get("cf-connecting-ip") || 
-                     "unknown";
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
-    // Check rate limit
-    const rateLimit = checkRateLimit(clientIP);
-    
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error("Missing server configuration");
+      return new Response(
+        JSON.stringify({ error: "Server configuration error" }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    // Get client IP for rate limiting
+    const clientIP =
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      req.headers.get("cf-connecting-ip") ||
+      "unknown";
+
+    // Database-backed rate limit check
+    const rateLimit = await checkRateLimit(supabase, clientIP);
+
     if (!rateLimit.allowed) {
       const resetMinutes = Math.ceil(rateLimit.resetIn / 60000);
       return new Response(
-        JSON.stringify({ 
+        JSON.stringify({
           error: "Too many requests",
           message: `Please try again in ${resetMinutes} minutes`,
-          retryAfter: Math.ceil(rateLimit.resetIn / 1000)
+          retryAfter: Math.ceil(rateLimit.resetIn / 1000),
         }),
-        { 
-          status: 429, 
-          headers: { 
-            ...corsHeaders, 
+        {
+          status: 429,
+          headers: {
+            ...corsHeaders,
             "Content-Type": "application/json",
             "X-RateLimit-Remaining": "0",
-            "X-RateLimit-Reset": String(Math.ceil(rateLimit.resetIn / 1000)),
-            "Retry-After": String(Math.ceil(rateLimit.resetIn / 1000))
-          } 
+            "Retry-After": String(Math.ceil(rateLimit.resetIn / 1000)),
+          },
         }
       );
     }
@@ -228,20 +213,6 @@ Deno.serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
-
-    // Create Supabase client with service role key for inserting
-    const supabaseUrl = Deno.env.get("SUPABASE_URL");
-    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-
-    if (!supabaseUrl || !supabaseServiceKey) {
-      console.error("Missing Supabase configuration");
-      return new Response(
-        JSON.stringify({ error: "Server configuration error" }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     // Insert consultation request
     const { data, error } = await supabase
@@ -271,21 +242,20 @@ Deno.serve(async (req) => {
     }
 
     return new Response(
-      JSON.stringify({ 
-        success: true, 
+      JSON.stringify({
+        success: true,
         message: "Consultation request submitted successfully",
-        id: data.id 
+        id: data.id,
       }),
-      { 
-        status: 200, 
-        headers: { 
-          ...corsHeaders, 
+      {
+        status: 200,
+        headers: {
+          ...corsHeaders,
           "Content-Type": "application/json",
-          "X-RateLimit-Remaining": String(rateLimit.remaining)
-        } 
+          "X-RateLimit-Remaining": String(rateLimit.remaining),
+        },
       }
     );
-
   } catch (error) {
     console.error("Unexpected error:", error instanceof Error ? error.message : "Unknown error");
     return new Response(
