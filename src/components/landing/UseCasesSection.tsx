@@ -16,17 +16,17 @@ import {
   Check,
 } from "lucide-react";
 
-// Import use case images
-import slide41 from "@/assets/use-cases/Slide41.jpeg";
-import slide42 from "@/assets/use-cases/Slide42.jpeg";
-import slide43 from "@/assets/use-cases/Slide43.jpeg";
-import slide44 from "@/assets/use-cases/Slide44.jpeg";
-import slide45 from "@/assets/use-cases/Slide45.jpeg";
-import slide46 from "@/assets/use-cases/Slide46.jpeg";
-import slide47 from "@/assets/use-cases/Slide47.jpeg";
-import slide48 from "@/assets/use-cases/Slide48.jpeg";
-import slide49 from "@/assets/use-cases/Slide49.jpeg";
-import slide50 from "@/assets/use-cases/Slide50.jpeg";
+// Import use case images (300 DPI high-resolution PNG)
+import slide41 from "@/assets/use-cases/Slide41.png";
+import slide42 from "@/assets/use-cases/Slide42.png";
+import slide43 from "@/assets/use-cases/Slide43.png";
+import slide44 from "@/assets/use-cases/Slide44.png";
+import slide45 from "@/assets/use-cases/Slide45.png";
+import slide46 from "@/assets/use-cases/Slide46.png";
+import slide47 from "@/assets/use-cases/Slide47.png";
+import slide48 from "@/assets/use-cases/Slide48.png";
+import slide49 from "@/assets/use-cases/Slide49.png";
+import slide50 from "@/assets/use-cases/Slide50.png";
 
 const useCases = [
   {
