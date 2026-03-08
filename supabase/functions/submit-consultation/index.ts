@@ -168,8 +168,8 @@ Deno.serve(async (req) => {
 
     // Get client IP for rate limiting
     const clientIP =
-      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       req.headers.get("cf-connecting-ip") ||
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       "unknown";
 
     // Database-backed rate limit check
