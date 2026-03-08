@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Calendar, Users, Clock, Video, CheckCircle2, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import profileImage from "@/assets/byeongjin-profile.jpg";
 
 const WebinarCTASection = () => {
   const { language } = useLanguage();
@@ -114,13 +115,13 @@ const WebinarCTASection = () => {
               {/* Manager Info */}
               <div className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border/50">
                 <img
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+                  src={profileImage}
                   alt="Byeongjin Jeong"
                   className="w-14 h-14 rounded-full object-cover"
                 />
                 <div>
                   <p className="font-medium">Byeongjin Jeong</p>
-                  <p className="text-sm text-muted-foreground">APAC Country Manager</p>
+                  <p className="text-sm text-muted-foreground">APAC Country Lead</p>
                 </div>
               </div>
             </div>

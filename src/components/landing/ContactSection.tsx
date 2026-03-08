@@ -9,7 +9,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useUtmParams } from "@/hooks/useUtmParams";
 import { useRateLimiter } from "@/hooks/useRateLimiter";
 import { contactFormSchema, utmParamsSchema } from "@/lib/validations/contactForm";
-import managerPhoto from "@/assets/byeongjin-jeong.jpg";
+import managerPhoto from "@/assets/byeongjin-profile.jpg";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 
@@ -213,7 +213,7 @@ const ContactSection = () => {
               <div className="mx-auto mb-4 h-24 w-24 overflow-hidden rounded-full border-2 border-primary/50 shadow-lg">
                 <img
                   src={managerPhoto}
-                  alt="Byeongjin Jeong - APAC Country Manager"
+                  alt="Byeongjin Jeong - APAC Country Lead"
                   className="h-full w-full object-cover"
                 />
               </div>
