@@ -9,7 +9,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useUtmParams } from "@/hooks/useUtmParams";
 import { useRateLimiter } from "@/hooks/useRateLimiter";
 import { contactFormSchema, utmParamsSchema } from "@/lib/validations/contactForm";
-import managerPhoto from "@/assets/byeongjin-profile.jpg";
+import managerPhoto from "@/assets/byeongjin-profile.png";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 

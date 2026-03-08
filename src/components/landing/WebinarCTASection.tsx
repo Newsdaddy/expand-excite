@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Calendar, Users, Clock, Video, CheckCircle2, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import profileImage from "@/assets/byeongjin-profile.jpg";
+import profileImage from "@/assets/byeongjin-profile.png";
 
 const WebinarCTASection = () => {
   const { language } = useLanguage();
