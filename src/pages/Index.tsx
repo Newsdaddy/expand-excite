@@ -3,6 +3,7 @@ import PainPointHero from "@/components/landing/PainPointHero";
 import BeforeAfterSection from "@/components/landing/BeforeAfterSection";
 import SolutionSection from "@/components/landing/SolutionSection";
 import SolutionDetailSection from "@/components/landing/SolutionDetailSection";
+import UseCasesSection from "@/components/landing/UseCasesSection";
 import FeaturesSection from "@/components/landing/FeaturesSection";
 import ROISection from "@/components/landing/ROISection";
 import PricingSection from "@/components/landing/PricingSection";
@@ -25,6 +26,9 @@ const Index = () => {
 
         {/* Solution Details - PPT 기반 상세 */}
         <SolutionDetailSection />
+
+        {/* Use Cases by Industry - PPT 슬라이드 41-50 */}
+        <UseCasesSection />
 
         {/* Features - ECDB 상세 기능 */}
         <FeaturesSection />
