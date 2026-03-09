@@ -93,7 +93,7 @@ const PainPointHero = () => {
           </span>
           <br />
           <span className="text-gray-900">
-            {isKo ? "하고 계시진 않나요?" : "these challenges?"}
+            {isKo ? "하고 계신가요?" : "these challenges?"}
           </span>
         </h1>
 
