@@ -3,31 +3,31 @@ import { Check, X, ArrowRight, Sparkles } from "lucide-react";
 
 const comparisons = [
   {
-    beforeKo: "여러 리포트에서 데이터 수집 → 3주",
-    afterKo: "ECDB에서 한 번에 → 3시간",
-    beforeEn: "Collecting data from multiple reports → 3 weeks",
-    afterEn: "All in ECDB → 3 hours",
+    beforeKo: "생성형AI에서 데이터 수집 및 검증 → 최대 3주",
+    afterKo: "ECDB에서 한 번에 → 5분 이내",
+    beforeEn: "Collecting & verifying data from GenAI → Up to 3 weeks",
+    afterEn: "All in ECDB → Under 5 minutes",
     category: "time",
   },
   {
-    beforeKo: "시장 비교 기준이 제각각 → 감으로 결정",
-    afterKo: "일관된 기준으로 비교 → 데이터로 결정",
-    beforeEn: "Different standards for comparison → Gut decision",
-    afterEn: "Consistent benchmarks → Data-driven decision",
+    beforeKo: "시장 분석 기준 제각각 → 감으로 결정",
+    afterKo: "검증된 기준으로 분석 → 데이터 기반 의사결정",
+    beforeEn: "Inconsistent market analysis standards → Gut decision",
+    afterEn: "Verified benchmarks → Data-driven decision",
     category: "quality",
   },
   {
-    beforeKo: "LinkedIn으로 리드 찾기 → 맥락 없음",
-    afterKo: "성장 데이터 + 리드 → '왜 이 회사인지' 설명 가능",
-    beforeEn: "Finding leads on LinkedIn → No context",
-    afterEn: "Growth data + leads → 'Why this company' explained",
+    beforeKo: "DB 없이 리드 찾기 → 시간 소진",
+    afterKo: "검증된 데이터 + 리드 → 왜 이 회사인지, 누가 결정권자인지 분석 가능",
+    beforeEn: "Finding leads without DB → Time wasted",
+    afterEn: "Verified data + leads → Know why this company and who decides",
     category: "context",
   },
   {
-    beforeKo: "뉴스 보고 나서 연락 → 이미 늦음",
-    afterKo: "성장 기업 선제 포착 → 타이밍 확보",
-    beforeEn: "Contacting after news → Already late",
-    afterEn: "Early growth detection → Perfect timing",
+    beforeKo: "어떤 셀러가 급성장 중인지 모름 → 뉴스 나오면 이미 늦음",
+    afterKo: "스토어별 트래픽·매출 추적 → 성장 기업 선제 발굴",
+    beforeEn: "No way to know which sellers are growing → Too late when it's news",
+    afterEn: "Track store traffic & sales → Discover growth companies early",
     category: "timing",
   },
 ];
@@ -63,12 +63,12 @@ const BeforeAfterSection = () => {
             </span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {isKo ? "달라진 업무 방식" : "Transformed Workflows"}
+            {isKo ? "지금 즉시 바꾸세요" : "Change It Now"}
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             {isKo
-              ? "ECDB 도입 전후, 실제 사용자들의 변화입니다"
-              : "Real changes experienced by actual users before and after ECDB"}
+              ? "AI 시대, 데이터가 능률 올리고 매출 만듭니다"
+              : "In the AI era, data drives efficiency and revenue"}
           </p>
         </div>
 
