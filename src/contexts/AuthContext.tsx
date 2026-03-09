@@ -104,23 +104,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       return { error: authError };
     }
 
-    // Create profile in profiles table
-    if (authData.user) {
-      const { error: profileError } = await supabase.from('profiles').insert({
-        id: authData.user.id,
-        email,
-        name,
-        company,
-        job_title,
-        phone: phone || null,
-        wants_consultation,
-      });
-
-      if (profileError) {
-        return { error: profileError };
-      }
-    }
-
+    // Profile is automatically created by database trigger
     setShowAuthModal(false);
     return { error: null };
   };

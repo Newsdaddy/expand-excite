@@ -11,8 +11,8 @@ interface LanguageContextType {
 const translations: Record<Language, Record<string, string>> = {
   ko: {
     // Header
-    'nav.sales': '솔루션 소개',
-    'nav.resources': '무료 자료',
+    'nav.sales': '데이터',
+    'nav.resources': '다운로드',
     'nav.login': '로그인',
     'nav.logout': '로그아웃',
     'nav.webinar': '웨비나 신청',
@@ -175,8 +175,8 @@ const translations: Record<Language, Record<string, string>> = {
   },
   en: {
     // Header
-    'nav.sales': 'Solutions',
-    'nav.resources': 'Resources',
+    'nav.sales': 'Data',
+    'nav.resources': 'Downloads',
     'nav.login': 'Login',
     'nav.logout': 'Logout',
     'nav.webinar': 'Register Webinar',
