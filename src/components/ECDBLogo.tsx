@@ -13,12 +13,19 @@ const ECDBLogo = ({ className = "", size = "md" }: ECDBLogoProps) => {
   };
 
   return (
-    <div className={`flex items-center ${className}`}>
+    <div className={`flex flex-col ${className}`}>
       <img
         src={ecdbLogo}
         alt="ECDB Logo"
         className={`${sizeClasses[size]} w-auto`}
       />
+      <div className="flex justify-between w-full">
+        {"APAC BLOG".split("").map((char, i) => (
+          <span key={i} className="text-[11px] font-bold text-muted-foreground">
+            {char === " " ? "\u00A0" : char}
+          </span>
+        ))}
+      </div>
     </div>
   );
 };
