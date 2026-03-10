@@ -71,7 +71,7 @@ const personas = [
     titleEn: "Finance & Investment",
     painKo: "투자 대상 커머스 기업의 실제 성과를 검증할 데이터가 없어요",
     painEn: "I have no data to verify the actual performance of commerce companies I'm evaluating",
-    detailKo: "IR 자료만으로는 실제 트랜잭션 규모나 성장률을 검증하기 어렵습니다. CDD, 밸류에이션에 활용할 신뢰할 수 있는 제3자 데이터가 필요해요.",
+    detailKo: "IR 자료만으로는 실제 실거래 규모나 성장률을 검증하기 어렵습니다. CDD, 밸류에이션에 활용할 신뢰할 수 있는 제3자 데이터가 필요해요.",
     detailEn: "IR materials alone can't verify actual transaction volumes or growth rates. I need reliable third-party data for CDD and valuation.",
     resultKo: "투자 심사 기간 50% 단축, CDD 정확도 향상",
     resultEn: "50% faster due diligence, improved CDD accuracy",
