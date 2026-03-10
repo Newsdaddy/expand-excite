@@ -1,5 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Check, X, ArrowRight, Sparkles } from "lucide-react";
+import { Check, X, ArrowRight, Sparkles, Calendar } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const comparisons = [
   {
@@ -32,36 +33,15 @@ const comparisons = [
   },
 ];
 
-const testimonials = [
-  {
-    quoteKo: "ECDB 덕분에 베트남 진출 타당성 분석을 2주 → 2일로 줄였습니다.",
-    quoteEn: "With ECDB, we reduced Vietnam market entry analysis from 2 weeks to 2 days.",
-    roleKo: "글로벌 물류사 전략기획팀",
-    roleEn: "Strategy Team, Global Logistics Company",
-  },
-  {
-    quoteKo: "고성장 기업 리드를 먼저 확보하니 미팅 성사율이 2배로 올랐어요.",
-    quoteEn: "Securing high-growth leads early doubled our meeting success rate.",
-    roleKo: "핀테크 스타트업 BD팀",
-    roleEn: "BD Team, Fintech Startup",
-  },
-];
-
 const BeforeAfterSection = () => {
   const { language } = useLanguage();
   const isKo = language === 'ko';
 
   return (
-    <section id="solution" className="py-20 bg-gray-50">
+    <section id="solution" className="py-16 bg-gray-50">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 mb-6">
-            <Sparkles className="h-4 w-4 text-green-500" />
-            <span className="text-sm font-medium text-green-500">
-              {isKo ? "오? 이게 되네?" : "Wait, this actually works?"}
-            </span>
-          </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             {isKo ? "지금 즉시 바꾸세요" : "Change It Now"}
           </h2>
@@ -70,6 +50,34 @@ const BeforeAfterSection = () => {
               ? "AI 시대, 데이터가 능률 올리고 매출 만듭니다"
               : "In the AI era, data drives efficiency and revenue"}
           </p>
+
+          {/* Stats */}
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16 mt-10">
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold text-primary">150+</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                {isKo ? "국가 커버리지" : "Countries Covered"}
+              </p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold text-primary">10K+</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                {isKo ? "스토어 데이터" : "Store Data"}
+              </p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold text-primary">1B+</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                {isKo ? "월간 실거래 분석" : "Monthly Transactions"}
+              </p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold text-primary">100K+</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                {isKo ? "의사결정자 리드" : "Decision-Maker Leads"}
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Before/After Comparisons */}
@@ -117,21 +125,14 @@ const BeforeAfterSection = () => {
           </div>
         </div>
 
-        {/* Testimonials */}
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm"
-            >
-              <blockquote className="text-lg mb-4">
-                "{isKo ? testimonial.quoteKo : testimonial.quoteEn}"
-              </blockquote>
-              <p className="text-sm text-muted-foreground">
-                — {isKo ? testimonial.roleKo : testimonial.roleEn}
-              </p>
-            </div>
-          ))}
+        {/* CTA Button */}
+        <div className="flex justify-center mt-2">
+          <Button size="lg" variant="gold" className="gap-2 text-lg px-8 py-6" asChild>
+            <a href="#webinar">
+              <Calendar className="h-5 w-5" />
+              {isKo ? "컨설팅 신청하기" : "Register for Consulting"}
+            </a>
+          </Button>
         </div>
       </div>
     </section>

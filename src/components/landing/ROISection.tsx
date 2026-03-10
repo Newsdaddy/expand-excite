@@ -92,7 +92,7 @@ const ROISection = () => {
   const isKo = language === "ko";
 
   return (
-    <section id="roi" className="py-20 bg-white">
+    <section id="roi" className="py-16 bg-white">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">

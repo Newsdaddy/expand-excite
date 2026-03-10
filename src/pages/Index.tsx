@@ -6,6 +6,7 @@ import SolutionDetailSection from "@/components/landing/SolutionDetailSection";
 import UseCasesSection from "@/components/landing/UseCasesSection";
 import FeaturesSection from "@/components/landing/FeaturesSection";
 import ROISection from "@/components/landing/ROISection";
+import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import PricingSection from "@/components/landing/PricingSection";
 import WebinarCTASection from "@/components/landing/WebinarCTASection";
 import Footer from "@/components/landing/Footer";
@@ -18,11 +19,11 @@ const Index = () => {
         {/* Pain Point Hero - "어? 내 문제네?" */}
         <PainPointHero />
 
-        {/* Before/After - "오? 이게 되네?" */}
-        <BeforeAfterSection />
-
-        {/* Solution Overview */}
+        {/* Solution Overview - "데이터가 왜 필요하신가요?" */}
         <SolutionSection />
+
+        {/* Before/After - "지금 즉시 바꾸세요" */}
+        <BeforeAfterSection />
 
         {/* Solution Details - PPT 기반 상세 */}
         <SolutionDetailSection />
@@ -35,6 +36,9 @@ const Index = () => {
 
         {/* ROI - 비용 절감/매출 창출 */}
         <ROISection />
+
+        {/* Testimonials & Customer Logos */}
+        <TestimonialsSection />
 
         {/* Pricing */}
         <PricingSection />

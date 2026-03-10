@@ -37,6 +37,7 @@ const features = [
     ],
     color: "from-blue-500/20 to-cyan-500/20",
     borderColor: "border-blue-500/30",
+    screenshot: "/screenshots/retailer.png",
   },
   {
     id: "store",
@@ -57,6 +58,7 @@ const features = [
     ],
     color: "from-purple-500/20 to-pink-500/20",
     borderColor: "border-purple-500/30",
+    screenshot: "/screenshots/growth1.png",
   },
   {
     id: "market",
@@ -77,6 +79,7 @@ const features = [
     ],
     color: "from-green-500/20 to-emerald-500/20",
     borderColor: "border-green-500/30",
+    screenshot: "/screenshots/market-country.png",
   },
   {
     id: "ranking",
@@ -97,6 +100,7 @@ const features = [
     ],
     color: "from-amber-500/20 to-orange-500/20",
     borderColor: "border-amber-500/30",
+    screenshot: "/screenshots/growth2.png",
   },
   {
     id: "leads",
@@ -117,6 +121,7 @@ const features = [
     ],
     color: "from-red-500/20 to-rose-500/20",
     borderColor: "border-red-500/30",
+    screenshot: "/screenshots/leads.png",
   },
   {
     id: "compare",
@@ -137,6 +142,7 @@ const features = [
     ],
     color: "from-indigo-500/20 to-violet-500/20",
     borderColor: "border-indigo-500/30",
+    screenshot: "/screenshots/compare.png",
   },
 ];
 
@@ -146,7 +152,7 @@ const SolutionDetailSection = () => {
   const [activeFeature, setActiveFeature] = useState(features[0]);
 
   return (
-    <section id="features-detail" className="py-20 bg-gray-50">
+    <section id="features-detail" className="py-16 bg-gray-50">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
@@ -237,21 +243,30 @@ const SolutionDetailSection = () => {
                 </Button>
               </div>
 
-              {/* Right: Data Points */}
-              <div className="bg-background/60 backdrop-blur-sm rounded-xl p-6">
-                <p className="text-sm font-medium text-muted-foreground mb-4">
-                  {isKo ? "제공 데이터" : "Available Data"}
-                </p>
-                <div className="grid grid-cols-1 gap-3">
-                  {activeFeature.dataPoints.map((point, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                        <Check className="h-3 w-3 text-primary" />
-                      </div>
-                      <span className="text-sm">{isKo ? point.ko : point.en}</span>
-                    </div>
-                  ))}
-                </div>
+              {/* Right: Screenshot with fade effect */}
+              <div className="relative rounded-xl overflow-hidden shadow-lg">
+                {/* Screenshot image */}
+                <img
+                  src={activeFeature.screenshot}
+                  alt={activeFeature.titleKo}
+                  className="w-full h-auto object-cover"
+                />
+                {/* Fade overlay on edges */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `
+                      radial-gradient(ellipse at center, transparent 50%, rgba(249,250,251,0.8) 100%)
+                    `,
+                  }}
+                />
+                {/* Bottom gradient fade */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(to top, rgba(249,250,251,1) 0%, transparent 100%)',
+                  }}
+                />
               </div>
             </div>
 

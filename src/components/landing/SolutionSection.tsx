@@ -1,8 +1,10 @@
-import { BarChart3, Building2, Globe2, LineChart, Map, Users2, TrendingUp, BookOpen, Search } from "lucide-react";
+import { BarChart3, Building2, Globe2, LineChart, Map, Users2, TrendingUp, BookOpen, Search, Calendar, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Button } from "@/components/ui/button";
 
 const SolutionSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isKo = language === 'ko';
 
   const track1Features = [
     {
@@ -59,13 +61,10 @@ const SolutionSection = () => {
   ];
 
   return (
-    <section id="solutions" className="relative py-24 bg-white">
+    <section id="solutions" className="relative py-16 bg-white">
       <div className="container relative mx-auto px-6">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="text-sm font-medium uppercase tracking-wider text-primary">
-            {t('solution.label')}
-          </span>
-          <h2 className="mt-4 font-display text-3xl font-bold sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold sm:text-4xl">
             {t('solution.title')}
           </h2>
         </div>

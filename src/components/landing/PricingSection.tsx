@@ -55,7 +55,7 @@ const PricingSection = () => {
   ];
 
   return (
-    <section id="pricing" className="relative py-24 bg-white">
+    <section id="pricing" className="relative py-16 bg-white">
       {/* Removed dark grid pattern */}
       
       <div className="container relative mx-auto px-6">

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Calendar, TrendingUp, Users, Building2, CreditCard, Package, ChevronRight } from "lucide-react";
+import { Calendar, TrendingUp, Users, Building2, CreditCard, Package, ChevronRight, Banknote } from "lucide-react";
 
 const personas = [
   {
@@ -64,6 +64,18 @@ const personas = [
     resultKo: "영업 타깃팅 정확도 3배 향상",
     resultEn: "3x improvement in sales targeting accuracy",
   },
+  {
+    id: "finance",
+    icon: Banknote,
+    titleKo: "투자/금융",
+    titleEn: "Finance & Investment",
+    painKo: "투자 대상 커머스 기업의 실제 성과를 검증할 데이터가 없어요",
+    painEn: "I have no data to verify the actual performance of commerce companies I'm evaluating",
+    detailKo: "IR 자료만으로는 실제 트랜잭션 규모나 성장률을 검증하기 어렵습니다. CDD, 밸류에이션에 활용할 신뢰할 수 있는 제3자 데이터가 필요해요.",
+    detailEn: "IR materials alone can't verify actual transaction volumes or growth rates. I need reliable third-party data for CDD and valuation.",
+    resultKo: "투자 심사 기간 50% 단축, CDD 정확도 향상",
+    resultEn: "50% faster due diligence, improved CDD accuracy",
+  },
 ];
 
 const PainPointHero = () => {
@@ -72,22 +84,16 @@ const PainPointHero = () => {
   const isKo = language === 'ko';
 
   return (
-    <section className="relative pt-24 pb-20 overflow-hidden bg-white">
+    <section className="relative pt-24 pb-12 overflow-hidden bg-white">
       {/* Background - subtle gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
 
       <div className="container relative mx-auto px-6">
-        {/* Badge */}
-        <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-            <span className="text-xs font-medium text-primary">
-              {isKo ? "이 문제, 당신만 겪는 게 아닙니다" : "You're not alone in this struggle"}
-            </span>
-          </div>
-        </div>
-
         {/* Main Title */}
         <h1 className="text-center text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          <span className="text-primary text-lg md:text-xl tracking-normal font-semibold block mb-2">
+            eCommerce Market Intelligence
+          </span>
           <span className="text-gray-600">
             {isKo ? "혹시 이런 고민," : "Do you face"}
           </span>
@@ -151,50 +157,6 @@ const PainPointHero = () => {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
-          <Button size="lg" variant="gold" className="gap-2" asChild>
-            <a href="#webinar">
-              <Calendar className="h-5 w-5" />
-              {isKo ? "컨설팅 신청하기" : "Register for Consulting"}
-            </a>
-          </Button>
-          <Button size="lg" variant="outline" className="gap-2" asChild>
-            <a href="#solution">
-              {isKo ? "어떻게 해결하나요?" : "How does it work?"}
-              <ChevronRight className="h-4 w-4" />
-            </a>
-          </Button>
-        </div>
-
-        {/* Stats */}
-        <div className="flex flex-wrap justify-center gap-8 md:gap-16 mt-16 pt-10 border-t border-gray-200">
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-primary">150+</p>
-            <p className="text-sm text-muted-foreground mt-1">
-              {isKo ? "국가 커버리지" : "Countries Covered"}
-            </p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-primary">10K+</p>
-            <p className="text-sm text-muted-foreground mt-1">
-              {isKo ? "스토어 데이터" : "Store Data"}
-            </p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-primary">1B+</p>
-            <p className="text-sm text-muted-foreground mt-1">
-              {isKo ? "월간 실거래 분석" : "Monthly Transactions"}
-            </p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-primary">100K+</p>
-            <p className="text-sm text-muted-foreground mt-1">
-              {isKo ? "의사결정자 리드" : "Decision-Maker Leads"}
-            </p>
           </div>
         </div>
       </div>
