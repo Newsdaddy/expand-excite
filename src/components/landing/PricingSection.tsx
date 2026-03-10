@@ -96,6 +96,11 @@ const PricingSection = () => {
               <div className="mt-6">
                 <span className="font-display text-4xl font-bold">{plan.price}</span>
                 <span className="text-muted-foreground">{plan.period}</span>
+                {plan.period && (
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {language === 'ko' ? '(연 단위 결제)' : '(billed annually)'}
+                  </p>
+                )}
               </div>
 
               <ul className="mt-8 space-y-4">
