@@ -288,7 +288,7 @@ const SolutionDetailSection = () => {
         </div>
 
         {/* Trust Badges */}
-        <div className="flex flex-wrap justify-center items-center gap-8 mt-16 pt-12 border-t border-border/50">
+        <div className="flex flex-wrap justify-center items-center gap-8 mt-8 pt-6 border-t border-border/50">
           <div className="flex items-center gap-3">
             <CreditCard className="h-5 w-5 text-muted-foreground" />
             <span className="text-sm text-muted-foreground">
