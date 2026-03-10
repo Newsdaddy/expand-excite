@@ -38,6 +38,7 @@ const features = [
     color: "from-blue-500/20 to-cyan-500/20",
     borderColor: "border-blue-500/30",
     screenshot: "/screenshots/retailer.png",
+    objectPosition: "center top",
   },
   {
     id: "store",
@@ -59,6 +60,7 @@ const features = [
     color: "from-purple-500/20 to-pink-500/20",
     borderColor: "border-purple-500/30",
     screenshot: "/screenshots/growth1.png",
+    objectPosition: "center center",
   },
   {
     id: "market",
@@ -80,6 +82,7 @@ const features = [
     color: "from-green-500/20 to-emerald-500/20",
     borderColor: "border-green-500/30",
     screenshot: "/screenshots/market-country.png",
+    objectPosition: "center top",
   },
   {
     id: "ranking",
@@ -101,6 +104,7 @@ const features = [
     color: "from-amber-500/20 to-orange-500/20",
     borderColor: "border-amber-500/30",
     screenshot: "/screenshots/ranking.png",
+    objectPosition: "left top",
   },
   {
     id: "leads",
@@ -122,6 +126,7 @@ const features = [
     color: "from-red-500/20 to-rose-500/20",
     borderColor: "border-red-500/30",
     screenshot: "/screenshots/leads.png",
+    objectPosition: "center top",
   },
   {
     id: "compare",
@@ -143,6 +148,7 @@ const features = [
     color: "from-indigo-500/20 to-violet-500/20",
     borderColor: "border-indigo-500/30",
     screenshot: "/screenshots/compare.png",
+    objectPosition: "center center",
   },
 ];
 
@@ -249,7 +255,8 @@ const SolutionDetailSection = () => {
                 <img
                   src={activeFeature.screenshot}
                   alt={activeFeature.titleKo}
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: activeFeature.objectPosition }}
                 />
                 {/* Fade overlay on edges */}
                 <div
@@ -271,7 +278,7 @@ const SolutionDetailSection = () => {
             </div>
 
             {/* Data Source Badge */}
-            <div className="absolute top-4 right-4">
+            <div className="absolute bottom-4 left-4">
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/80 backdrop-blur text-xs">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 {isKo ? "월간 업데이트" : "Monthly Updates"}
