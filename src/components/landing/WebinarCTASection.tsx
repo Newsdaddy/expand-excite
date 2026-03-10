@@ -24,7 +24,7 @@ const WebinarCTASection = () => {
     setIsSubmitting(false);
     setIsSubmitted(true);
     toast({
-      title: isKo ? "웨비나 신청 완료!" : "Webinar Registration Complete!",
+      title: isKo ? "컨설팅 신청 완료!" : "Consulting Registration Complete!",
       description: isKo
         ? "확인 이메일을 발송해드렸습니다."
         : "A confirmation email has been sent.",
@@ -34,7 +34,7 @@ const WebinarCTASection = () => {
   const benefits = [
     {
       icon: Video,
-      titleKo: "라이브 데모",
+      titleKo: "라이브 시연",
       titleEn: "Live Demo",
       descKo: "실제 ECDB 플랫폼을 직접 시연",
       descEn: "See the actual ECDB platform in action",
@@ -48,7 +48,7 @@ const WebinarCTASection = () => {
     },
     {
       icon: Clock,
-      titleKo: "30분 소요",
+      titleKo: "30분 이내",
       titleEn: "30 Minutes",
       descKo: "짧고 임팩트 있는 세션",
       descEn: "Short and impactful session",
@@ -65,22 +65,22 @@ const WebinarCTASection = () => {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
                 <Calendar className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium text-primary">
-                  {isKo ? "무료 웨비나" : "Free Webinar"}
+                  {isKo ? "무료 온라인 컨설팅" : "Free Online Consulting"}
                 </span>
               </div>
 
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {isKo ? (
                   <>
-                    ECDB 라이브 데모
+                    맞춤 컨설팅
                     <br />
-                    <span className="text-primary">무료로 참석하세요</span>
+                    <span className="text-primary">지금 신청하세요</span>
                   </>
                 ) : (
                   <>
-                    ECDB Live Demo
+                    Custom Consulting
                     <br />
-                    <span className="text-primary">Join for Free</span>
+                    <span className="text-primary">Apply Now</span>
                   </>
                 )}
               </h2>
@@ -145,11 +145,11 @@ const WebinarCTASection = () => {
               ) : (
                 <>
                   <h3 className="text-xl font-bold mb-2">
-                    {isKo ? "웨비나 신청" : "Register for Webinar"}
+                    {isKo ? "컨설팅 신청" : "Register for Consulting"}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-6">
                     {isKo
-                      ? "아래 정보를 입력하시면 웨비나 참석 링크를 보내드립니다"
+                      ? "아래 정보를 입력하시면 온라인 컨설팅 초대를 보내드립니다"
                       : "Fill in the form below and we'll send you the webinar link"}
                   </p>
 
@@ -224,7 +224,7 @@ const WebinarCTASection = () => {
                       ) : (
                         <>
                           <Calendar className="h-4 w-4 mr-2" />
-                          {isKo ? "무료 웨비나 신청하기" : "Register for Free Webinar"}
+                          {isKo ? "무료 컨설팅 신청하기" : "Register for Free Consulting"}
                         </>
                       )}
                     </Button>

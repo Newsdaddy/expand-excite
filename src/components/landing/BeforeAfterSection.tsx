@@ -3,9 +3,9 @@ import { Check, X, ArrowRight, Sparkles } from "lucide-react";
 
 const comparisons = [
   {
-    beforeKo: "생성형AI에서 데이터 수집 및 검증 → 최대 3주",
+    beforeKo: "생성형AI에서 데이터 수집 및 검증 → 최대 2주",
     afterKo: "ECDB에서 한 번에 → 5분 이내",
-    beforeEn: "Collecting & verifying data from GenAI → Up to 3 weeks",
+    beforeEn: "Collecting & verifying data from GenAI → Up to 2 weeks",
     afterEn: "All in ECDB → Under 5 minutes",
     category: "time",
   },
@@ -18,16 +18,16 @@ const comparisons = [
   },
   {
     beforeKo: "DB 없이 리드 찾기 → 시간 소진",
-    afterKo: "검증된 데이터 + 리드 → 왜 이 회사인지, 누가 결정권자인지 분석 가능",
+    afterKo: "국가별 플레이어 + 리드DB → 타깃 숏리스트업",
     beforeEn: "Finding leads without DB → Time wasted",
-    afterEn: "Verified data + leads → Know why this company and who decides",
+    afterEn: "Players by country + Lead DB → Target shortlist ready",
     category: "context",
   },
   {
-    beforeKo: "어떤 셀러가 급성장 중인지 모름 → 뉴스 나오면 이미 늦음",
-    afterKo: "스토어별 트래픽·매출 추적 → 성장 기업 선제 발굴",
-    beforeEn: "No way to know which sellers are growing → Too late when it's news",
-    afterEn: "Track store traffic & sales → Discover growth companies early",
+    beforeKo: "국가별 성장/하락 스토어 모름 → 전략 수립 불가",
+    afterKo: "스토어별 트래픽·매출 추적 → 투자 기업 선별",
+    beforeEn: "Don't know growing/declining stores by country → No strategy possible",
+    afterEn: "Track store traffic & sales → Select investment targets",
     category: "timing",
   },
 ];

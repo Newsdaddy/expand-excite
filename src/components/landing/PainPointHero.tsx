@@ -159,7 +159,7 @@ const PainPointHero = () => {
           <Button size="lg" variant="gold" className="gap-2" asChild>
             <a href="#webinar">
               <Calendar className="h-5 w-5" />
-              {isKo ? "웨비나 신청하기" : "Register for Webinar"}
+              {isKo ? "컨설팅 신청하기" : "Register for Consulting"}
             </a>
           </Button>
           <Button size="lg" variant="outline" className="gap-2" asChild>
@@ -187,7 +187,7 @@ const PainPointHero = () => {
           <div className="text-center">
             <p className="text-3xl md:text-4xl font-bold text-primary">1B+</p>
             <p className="text-sm text-muted-foreground mt-1">
-              {isKo ? "월간 트랜잭션 분석" : "Monthly Transactions"}
+              {isKo ? "월간 실거래 분석" : "Monthly Transactions"}
             </p>
           </div>
           <div className="text-center">

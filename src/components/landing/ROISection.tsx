@@ -18,8 +18,8 @@ const metrics = [
     valueEn: "90%",
     labelKo: "시간 절감",
     labelEn: "Time Saved",
-    descKo: "3주 → 3시간으로 시장 분석 시간 단축",
-    descEn: "Market analysis time reduced from 3 weeks to 3 hours",
+    descKo: "2주 → 5분으로 데이터 확보 시간 단축",
+    descEn: "Data acquisition time reduced from 2 weeks to 5 minutes",
     color: "from-blue-500 to-cyan-500",
   },
   {
@@ -70,16 +70,16 @@ const calculations = [
     titleEn: "External Research Cost",
     beforeKo: "€30,000 - €100,000/년",
     beforeEn: "€30,000 - €100,000/year",
-    afterKo: "€0 (ECDB 포함)",
-    afterEn: "€0 (included in ECDB)",
+    afterKo: "€0 (ECDB 제외)",
+    afterEn: "€0 (excluding ECDB)",
     savingsKo: "€30K - €100K/년 절약",
     savingsEn: "€30K - €100K/year saved",
   },
   {
     titleKo: "영업 기회 비용",
     titleEn: "Sales Opportunity Cost",
-    beforeKo: "3주 지연 → 경쟁사 선점",
-    beforeEn: "3-week delay → competitors win",
+    beforeKo: "2주 지연 → 경쟁사 선점",
+    beforeEn: "2-week delay → competitors win",
     afterKo: "실시간 대응 → 선점 기회",
     afterEn: "Real-time response → first-mover advantage",
     savingsKo: "기회비용 최소화",
@@ -105,8 +105,8 @@ const ROISection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             {isKo ? (
               <>
-                <span className="text-gray-600">투자 대비</span>{" "}
-                <span className="text-gray-900">확실한 수익</span>
+                <span className="text-gray-600">수치화 가능한</span>{" "}
+                <span className="text-gray-900">성과</span>
               </>
             ) : (
               <>

@@ -314,7 +314,7 @@ const Resources = () => {
             </p>
             <Button variant="gold" size="lg" asChild>
               <a href="/#webinar" className="gap-2">
-                {isKo ? "무료 웨비나 신청하기" : "Register for Free Webinar"}
+                {isKo ? "무료 온라인 컨설팅 신청하기" : "Register for Free Online Consulting"}
                 <ChevronRight className="h-4 w-4" />
               </a>
             </Button>

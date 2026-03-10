@@ -159,7 +159,7 @@ const SolutionDetailSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             {isKo ? (
               <>
-                <span className="text-gray-600">10억+ 트랜잭션 기반</span>
+                <span className="text-gray-600">실거래 데이터 기반</span>
                 <br />
                 <span className="text-gray-900">프리미엄 이커머스 인텔리전스</span>
               </>
@@ -231,7 +231,7 @@ const SolutionDetailSection = () => {
 
                 <Button variant="gold" className="gap-2" asChild>
                   <a href="#webinar">
-                    {isKo ? "웨비나에서 자세히 보기" : "See Details in Webinar"}
+                    {isKo ? "온라인 컨설팅에서 자세히 보기" : "See Details in Online Consulting"}
                     <ChevronRight className="h-4 w-4" />
                   </a>
                 </Button>
@@ -276,7 +276,7 @@ const SolutionDetailSection = () => {
           <div className="flex items-center gap-3">
             <TrendingUp className="h-5 w-5 text-muted-foreground" />
             <span className="text-sm text-muted-foreground">
-              {isKo ? "월 10억+ 트랜잭션 분석" : "1B+ Monthly Transactions"}
+              {isKo ? "월 10억+ 실거래 분석" : "1B+ Monthly Transactions"}
             </span>
           </div>
           <div className="flex items-center gap-3">
