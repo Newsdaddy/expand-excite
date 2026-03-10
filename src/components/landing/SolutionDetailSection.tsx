@@ -100,7 +100,7 @@ const features = [
     ],
     color: "from-amber-500/20 to-orange-500/20",
     borderColor: "border-amber-500/30",
-    screenshot: "/screenshots/growth2.png",
+    screenshot: "/screenshots/ranking.png",
   },
   {
     id: "leads",
@@ -244,12 +244,12 @@ const SolutionDetailSection = () => {
               </div>
 
               {/* Right: Screenshot with fade effect */}
-              <div className="relative rounded-xl overflow-hidden shadow-lg">
+              <div className="relative rounded-xl overflow-hidden shadow-lg h-[320px]">
                 {/* Screenshot image */}
                 <img
                   src={activeFeature.screenshot}
                   alt={activeFeature.titleKo}
-                  className="w-full h-auto object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
                 {/* Fade overlay on edges */}
                 <div
