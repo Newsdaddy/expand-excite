@@ -11,6 +11,79 @@ const RATE_LIMIT = {
   windowMs: 60 * 60 * 1000, // 1 hour
 };
 
+// Email notification recipients
+const NOTIFICATION_EMAILS = [
+  "editorjin0326@gmail.com",
+  "byeongjin.jeong@ecdb.com",
+  "byeongjin.jeong05@gmail.com",
+];
+
+// Send email notification via Resend API
+async function sendEmailNotification(data: {
+  name: string;
+  company: string;
+  email: string;
+  phone: string | null;
+  message: string;
+}) {
+  const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+
+  if (!RESEND_API_KEY) {
+    console.warn("RESEND_API_KEY not configured, skipping email notification");
+    return;
+  }
+
+  const emailContent = `
+새로운 상담 신청이 접수되었습니다.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 상담 신청 정보
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+이름: ${data.name}
+회사: ${data.company}
+이메일: ${data.email}
+연락처: ${data.phone || "미입력"}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 문의 내용
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+${data.message}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⏰ 접수 시간: ${new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ECDB APAC 블로그 상담 시스템
+`;
+
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: "ECDB APAC <onboarding@resend.dev>",
+        to: NOTIFICATION_EMAILS,
+        subject: `[ECDB 상담] ${data.company} - ${data.name}`,
+        text: emailContent,
+      }),
+    });
+
+    if (!res.ok) {
+      const error = await res.text();
+      console.error("Failed to send email:", error);
+    } else {
+      console.log("Email notification sent to:", NOTIFICATION_EMAILS.join(", "));
+    }
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
+}
+
 function hashIP(ip: string): string {
   const encoder = new TextEncoder();
   const data = encoder.encode(ip + (Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "salt"));
@@ -240,6 +313,15 @@ Deno.serve(async (req) => {
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+
+    // Send email notification (non-blocking)
+    sendEmailNotification({
+      name: validation.sanitized.name,
+      company: validation.sanitized.company,
+      email: validation.sanitized.email,
+      phone: validation.sanitized.phone,
+      message: validation.sanitized.message,
+    }).catch((err) => console.error("Email notification failed:", err));
 
     return new Response(
       JSON.stringify({

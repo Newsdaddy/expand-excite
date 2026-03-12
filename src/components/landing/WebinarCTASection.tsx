@@ -7,28 +7,65 @@ import { Calendar, Users, Clock, Video, CheckCircle2, Loader2 } from "lucide-rea
 import { useToast } from "@/hooks/use-toast";
 import profileImage from "@/assets/byeongjin-profile.png";
 
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+
 const WebinarCTASection = () => {
   const { language } = useLanguage();
   const { toast } = useToast();
   const isKo = language === 'ko';
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    email: "",
+    jobTitle: "",
+    interest: "",
+  });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/submit-consultation`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          phone: null,
+          message: `[컨설팅 신청] 직함: ${formData.jobTitle}${formData.interest ? `, 관심분야: ${formData.interest}` : ""}`,
+        }),
+      });
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    toast({
-      title: isKo ? "컨설팅 신청 완료!" : "Consulting Registration Complete!",
-      description: isKo
-        ? "확인 이메일을 발송해드렸습니다."
-        : "A confirmation email has been sent.",
-    });
+      if (!response.ok) {
+        throw new Error("Submission failed");
+      }
+
+      setIsSubmitted(true);
+      toast({
+        title: isKo ? "컨설팅 신청 완료!" : "Consulting Registration Complete!",
+        description: isKo
+          ? "확인 이메일을 발송해드렸습니다."
+          : "A confirmation email has been sent.",
+      });
+    } catch (error) {
+      toast({
+        title: isKo ? "오류가 발생했습니다" : "An error occurred",
+        description: isKo ? "잠시 후 다시 시도해주세요." : "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const benefits = [
@@ -160,6 +197,9 @@ const WebinarCTASection = () => {
                           {isKo ? "이름" : "Name"} *
                         </label>
                         <Input
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
                           required
                           placeholder={isKo ? "홍길동" : "John Doe"}
                         />
@@ -169,6 +209,9 @@ const WebinarCTASection = () => {
                           {isKo ? "회사명" : "Company"} *
                         </label>
                         <Input
+                          name="company"
+                          value={formData.company}
+                          onChange={handleChange}
                           required
                           placeholder={isKo ? "(주)회사명" : "Company Inc."}
                         />
@@ -180,7 +223,10 @@ const WebinarCTASection = () => {
                         {isKo ? "이메일" : "Email"} *
                       </label>
                       <Input
+                        name="email"
                         type="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         required
                         placeholder="example@company.com"
                       />
@@ -191,6 +237,9 @@ const WebinarCTASection = () => {
                         {isKo ? "직함/포지션" : "Job Title"} *
                       </label>
                       <Input
+                        name="jobTitle"
+                        value={formData.jobTitle}
+                        onChange={handleChange}
                         required
                         placeholder={isKo ? "예: 전략기획팀 매니저" : "e.g., Strategy Manager"}
                       />
@@ -201,6 +250,9 @@ const WebinarCTASection = () => {
                         {isKo ? "관심 분야 (선택)" : "Area of Interest (Optional)"}
                       </label>
                       <Textarea
+                        name="interest"
+                        value={formData.interest}
+                        onChange={handleChange}
                         placeholder={isKo
                           ? "예: 동남아 시장 진출, 물류 파트너십 등"
                           : "e.g., Southeast Asia expansion, logistics partnerships"
