@@ -272,7 +272,7 @@ const Resources = () => {
               return (
                 <div
                   key={resource.id}
-                  className="bg-card border border-border/50 rounded-xl overflow-hidden hover:border-primary/30 transition-colors"
+                  className="bg-card border border-border/50 rounded-xl overflow-hidden hover:border-primary/30 transition-colors flex flex-col h-full"
                 >
                   {/* Thumbnail */}
                   {resource.thumbnail_url ? (
@@ -289,7 +289,7 @@ const Resources = () => {
                     </div>
                   )}
 
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-1">
                     <div className="flex items-start justify-between mb-3">
                       <span className="px-2 py-1 text-xs font-medium bg-muted rounded">
                         {resource.file_type}
@@ -304,13 +304,13 @@ const Resources = () => {
                     <h3 className="font-bold text-lg mb-2 line-clamp-2">
                       {isKo ? resource.titleKo || resource.title : resource.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                    <p className="text-sm text-muted-foreground line-clamp-2 flex-1">
                       {isKo ? resource.descKo || resource.description : resource.description}
                     </p>
 
                     <Button
                       variant={user ? "gold" : "outline"}
-                      className="w-full gap-2"
+                      className="w-full gap-2 mt-4"
                       onClick={() => handleDownload(resource)}
                       disabled={isDownloading}
                     >
