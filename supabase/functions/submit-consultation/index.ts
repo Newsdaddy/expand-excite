@@ -12,10 +12,10 @@ const RATE_LIMIT = {
 };
 
 // Email notification recipients
+// NOTE: Resend 무료 플랜은 가입 이메일로만 발송 가능
+// 다른 이메일로 보내려면 resend.com/domains 에서 도메인 인증 필요
 const NOTIFICATION_EMAILS = [
   "editorjin0326@gmail.com",
-  "byeongjin.jeong@ecdb.com",
-  "byeongjin.jeong05@gmail.com",
 ];
 
 // Send email notification via Resend API
