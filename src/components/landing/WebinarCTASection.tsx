@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Calendar, Users, Clock, Video, CheckCircle2, Loader2 } from "lucide-react";
+import { Calendar, Users, Clock, Video, CheckCircle2, Loader2, Linkedin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import profileImage from "@/assets/byeongjin-profile.png";
 
@@ -150,16 +150,28 @@ const WebinarCTASection = () => {
               </div>
 
               {/* Manager Info */}
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-white border border-gray-200 shadow-sm">
-                <img
-                  src={profileImage}
-                  alt="Byeongjin Jeong"
-                  className="w-14 h-14 rounded-full object-cover"
-                />
-                <div>
-                  <p className="font-medium">Byeongjin Jeong</p>
-                  <p className="text-sm text-muted-foreground">APAC Country Lead</p>
+              <div className="flex items-center justify-between gap-4 p-4 rounded-xl bg-white border border-gray-200 shadow-sm">
+                <div className="flex items-center gap-4">
+                  <img
+                    src={profileImage}
+                    alt="Byeongjin Jeong"
+                    className="w-14 h-14 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="font-medium">Byeongjin Jeong</p>
+                    <p className="text-sm text-muted-foreground">APAC Country Lead</p>
+                  </div>
                 </div>
+                <a
+                  href="https://www.linkedin.com/in/valueforyourbiz/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0A66C2] text-white text-sm font-medium hover:bg-[#004182] transition-colors"
+                >
+                  <Linkedin className="h-4 w-4" />
+                  <span className="hidden sm:inline">LinkedIn Connect</span>
+                  <span className="sm:hidden">Connect</span>
+                </a>
               </div>
             </div>
 
