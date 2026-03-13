@@ -30,7 +30,11 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-white/95 backdrop-blur-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-6">
         <div className="flex items-center gap-8">
-          <Link to="/" className="hover:opacity-80 transition-opacity">
+          <Link
+            to="/"
+            className="hover:opacity-80 transition-opacity"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
             <ECDBLogo size="lg" />
           </Link>
 
