@@ -8,6 +8,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import AuthModal from "@/components/auth/AuthModal";
 import Index from "./pages/Index";
 import Resources from "./pages/Resources";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/resources" element={<Resources />} />
+              <Route path="/admin" element={<Admin />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
