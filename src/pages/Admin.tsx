@@ -92,11 +92,6 @@ const Admin = () => {
         .select("*")
         .order("created_at", { ascending: false });
 
-      console.log("Consultations:", consultData, "Error:", consultError);
-
-      if (consultError) {
-        console.error("Consultation fetch error:", consultError);
-      }
       if (consultData) {
         setConsultations(consultData);
       }
@@ -107,11 +102,6 @@ const Admin = () => {
         .select("*")
         .order("created_at", { ascending: false });
 
-      console.log("Users:", userData, "Error:", userError);
-
-      if (userError) {
-        console.error("Users fetch error:", userError);
-      }
       if (userData) {
         setUsers(userData);
       }
