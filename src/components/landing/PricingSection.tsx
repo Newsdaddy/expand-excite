@@ -116,7 +116,9 @@ const PricingSection = () => {
                 variant={plan.highlighted ? "gold" : "heroOutline"}
                 size="lg"
                 className="mt-8 w-full"
-                onClick={() => window.location.href = '#contact'}
+                onClick={() => {
+                  document.getElementById('webinar')?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 {t('pricing.consultBtn')}
               </Button>
