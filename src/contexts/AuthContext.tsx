@@ -98,6 +98,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           name,
           company,
           job_title,
+          phone,
+          wants_consultation,
         },
       },
     });

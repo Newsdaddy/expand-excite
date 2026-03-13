@@ -340,10 +340,8 @@ const Admin = () => {
                         </TableCell>
                         <TableCell>{user.phone || "-"}</TableCell>
                         <TableCell className="text-center">
-                          {user.wants_consultation ? (
+                          {user.wants_consultation && (
                             <CheckCircle2 className="h-5 w-5 text-green-500 mx-auto" />
-                          ) : (
-                            <XCircle className="h-5 w-5 text-muted-foreground mx-auto" />
                           )}
                         </TableCell>
                       </TableRow>
