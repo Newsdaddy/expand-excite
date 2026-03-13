@@ -98,7 +98,7 @@ const WebinarCTASection = () => {
         <div className="max-w-5xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-stretch">
             {/* Left: Info */}
-            <div className="flex flex-col">
+            <div className="flex flex-col justify-end lg:pt-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
                 <Calendar className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium text-primary">
