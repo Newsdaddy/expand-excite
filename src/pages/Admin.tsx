@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
@@ -57,8 +57,7 @@ interface UserProfile {
 }
 
 const Admin = () => {
-  const { user, signOut } = useAuth();
-  const navigate = useNavigate();
+  const { user, signOut, setShowAuthModal, setAuthModalMode } = useAuth();
   const [loading, setLoading] = useState(true);
   const [consultations, setConsultations] = useState<ConsultationRequest[]>([]);
   const [users, setUsers] = useState<UserProfile[]>([]);
@@ -67,16 +66,10 @@ const Admin = () => {
   const isAdmin = user && ADMIN_EMAILS.includes(user.email || "");
 
   useEffect(() => {
-    if (!user) {
-      navigate("/");
-      return;
+    if (user && isAdmin) {
+      fetchData();
     }
-    if (!isAdmin) {
-      navigate("/");
-      return;
-    }
-    fetchData();
-  }, [user, isAdmin, navigate]);
+  }, [user, isAdmin]);
 
   const fetchData = async () => {
     setRefreshing(true);
@@ -119,14 +112,36 @@ const Admin = () => {
     });
   };
 
-  if (!user || !isAdmin) {
+  if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <Shield className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+          <h1 className="text-2xl font-bold mb-2">관리자 로그인 필요</h1>
+          <p className="text-muted-foreground mb-4">관리자 계정으로 로그인해주세요.</p>
+          <div className="flex gap-3 justify-center">
+            <Button onClick={() => { setAuthModalMode('login'); setShowAuthModal(true); }}>
+              로그인
+            </Button>
+            <Button variant="outline" asChild>
+              <Link to="/">홈으로</Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <Shield className="h-16 w-16 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold mb-2">접근 권한 없음</h1>
           <p className="text-muted-foreground mb-4">관리자만 접근할 수 있습니다.</p>
-          <Button onClick={() => navigate("/")}>홈으로 돌아가기</Button>
+          <Button variant="outline" asChild>
+            <Link to="/">홈으로 돌아가기</Link>
+          </Button>
         </div>
       </div>
     );
