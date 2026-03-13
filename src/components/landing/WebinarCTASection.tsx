@@ -96,9 +96,9 @@ const WebinarCTASection = () => {
     <section id="webinar" className="py-20 bg-gray-50 scroll-mt-20">
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-stretch">
             {/* Left: Info */}
-            <div>
+            <div className="flex flex-col">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
                 <Calendar className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium text-primary">
@@ -150,7 +150,7 @@ const WebinarCTASection = () => {
               </div>
 
               {/* Manager Info */}
-              <div className="flex items-center justify-between gap-4 p-4 rounded-xl bg-white border border-gray-200 shadow-sm">
+              <div className="flex items-center justify-between gap-4 p-4 rounded-xl bg-white border border-gray-200 shadow-sm mt-auto">
                 <div className="flex items-center gap-4">
                   <img
                     src={profileImage}
