@@ -7,12 +7,41 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Loader2, Mail, Lock, User, Building2, Briefcase, Phone, Eye, EyeOff } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+
+// Country list with flag, name, and dial code
+const countries = [
+  { code: 'KR', flag: '🇰🇷', name: '대한민국', nameEn: 'South Korea', dialCode: '+82' },
+  { code: 'US', flag: '🇺🇸', name: '미국', nameEn: 'United States', dialCode: '+1' },
+  { code: 'JP', flag: '🇯🇵', name: '일본', nameEn: 'Japan', dialCode: '+81' },
+  { code: 'CN', flag: '🇨🇳', name: '중국', nameEn: 'China', dialCode: '+86' },
+  { code: 'SG', flag: '🇸🇬', name: '싱가포르', nameEn: 'Singapore', dialCode: '+65' },
+  { code: 'ID', flag: '🇮🇩', name: '인도네시아', nameEn: 'Indonesia', dialCode: '+62' },
+  { code: 'VN', flag: '🇻🇳', name: '베트남', nameEn: 'Vietnam', dialCode: '+84' },
+  { code: 'TH', flag: '🇹🇭', name: '태국', nameEn: 'Thailand', dialCode: '+66' },
+  { code: 'MY', flag: '🇲🇾', name: '말레이시아', nameEn: 'Malaysia', dialCode: '+60' },
+  { code: 'PH', flag: '🇵🇭', name: '필리핀', nameEn: 'Philippines', dialCode: '+63' },
+  { code: 'IN', flag: '🇮🇳', name: '인도', nameEn: 'India', dialCode: '+91' },
+  { code: 'AU', flag: '🇦🇺', name: '호주', nameEn: 'Australia', dialCode: '+61' },
+  { code: 'NZ', flag: '🇳🇿', name: '뉴질랜드', nameEn: 'New Zealand', dialCode: '+64' },
+  { code: 'GB', flag: '🇬🇧', name: '영국', nameEn: 'United Kingdom', dialCode: '+44' },
+  { code: 'DE', flag: '🇩🇪', name: '독일', nameEn: 'Germany', dialCode: '+49' },
+  { code: 'FR', flag: '🇫🇷', name: '프랑스', nameEn: 'France', dialCode: '+33' },
+  { code: 'HK', flag: '🇭🇰', name: '홍콩', nameEn: 'Hong Kong', dialCode: '+852' },
+  { code: 'TW', flag: '🇹🇼', name: '대만', nameEn: 'Taiwan', dialCode: '+886' },
+];
 
 const AuthModal = () => {
   const { language } = useLanguage();
@@ -29,6 +58,7 @@ const AuthModal = () => {
 
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState('KR');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -74,13 +104,19 @@ const AuthModal = () => {
           return;
         }
 
+        // Format phone with country code and name
+        const country = countries.find(c => c.code === selectedCountry);
+        const formattedPhone = formData.phone && country
+          ? `${country.dialCode} ${formData.phone} (${country.nameEn})`
+          : undefined;
+
         const { error } = await signUp({
           email: formData.email,
           password: formData.password,
           name: formData.name,
           company: formData.company,
           job_title: formData.job_title,
-          phone: formData.phone || undefined,
+          phone: formattedPhone,
           wants_consultation: formData.wants_consultation,
         });
 
@@ -114,6 +150,7 @@ const AuthModal = () => {
       phone: '',
       wants_consultation: false,
     });
+    setSelectedCountry('KR');
   };
 
   const switchMode = () => {
@@ -189,14 +226,37 @@ const AuthModal = () => {
                   <Phone className="h-4 w-4" />
                   {isKo ? '전화번호 (선택)' : 'Phone (Optional)'}
                 </Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="+82 10-1234-5678"
-                />
+                <div className="flex gap-2">
+                  <Select value={selectedCountry} onValueChange={setSelectedCountry}>
+                    <SelectTrigger className="w-[140px]">
+                      <SelectValue>
+                        {(() => {
+                          const country = countries.find(c => c.code === selectedCountry);
+                          return country ? `${country.flag} ${isKo ? country.name : country.nameEn}` : '';
+                        })()}
+                      </SelectValue>
+                    </SelectTrigger>
+                    <SelectContent className="max-h-[200px]">
+                      {countries.map((country) => (
+                        <SelectItem key={country.code} value={country.code}>
+                          <span className="flex items-center gap-2">
+                            <span>{country.flag}</span>
+                            <span>{isKo ? country.name : country.nameEn}</span>
+                          </span>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="10-1234-5678"
+                    className="flex-1"
+                  />
+                </div>
               </div>
             </>
           )}
