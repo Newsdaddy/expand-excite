@@ -23,6 +23,19 @@ import { useToast } from "@/hooks/use-toast";
 // Default resources (used if database is empty)
 const defaultResources = [
   {
+    id: "0",
+    title: "ECDB Global E-Commerce Compass 2026",
+    titleKo: "ECDB 글로벌 이커머스 나침반 2026",
+    description: "Comprehensive global e-commerce market analysis and strategic insights for 2026",
+    descKo: "2026년 글로벌 이커머스 시장 종합 분석 및 전략적 인사이트",
+    file_type: "PDF Report",
+    pages: 45,
+    icon: Globe,
+    thumbnail_url: "",
+    file_path: "/downloads/ECDB_Global_E-Commerce_Compass_2026.pdf",
+    is_public: true,
+  },
+  {
     id: "1",
     title: "2026 Southeast Asia Ecommerce Market Report",
     titleKo: "2026 동남아 이커머스 시장 보고서",
@@ -138,21 +151,32 @@ const Resources = () => {
     setDownloading(resource.id);
 
     try {
-      const { data, error } = await supabase.storage
-        .from('resources')
-        .download(resource.file_path);
+      // Check if it's a public file (starts with /)
+      if (resource.file_path.startsWith('/')) {
+        // Direct download from public folder
+        const a = document.createElement('a');
+        a.href = resource.file_path;
+        a.download = resource.file_path.split('/').pop() || 'download';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } else {
+        // Download from Supabase storage
+        const { data, error } = await supabase.storage
+          .from('resources')
+          .download(resource.file_path);
 
-      if (error) throw error;
+        if (error) throw error;
 
-      // Create download link
-      const url = URL.createObjectURL(data);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = resource.file_path.split('/').pop() || 'download';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+        const url = URL.createObjectURL(data);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = resource.file_path.split('/').pop() || 'download';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
 
       toast({
         title: isKo ? '다운로드 완료!' : 'Download Complete!',
