@@ -48,10 +48,10 @@ const WebinarCTASection = () => {
 
       setIsSubmitted(true);
       toast({
-        title: isKo ? "컨설팅 신청 완료!" : "Consulting Registration Complete!",
+        title: isKo ? "접수 완료!" : "Request received!",
         description: isKo
-          ? "확인 이메일을 발송해드렸습니다."
-          : "A confirmation email has been sent.",
+          ? "곧 연락드리겠습니다."
+          : "We'll be in touch shortly.",
       });
     } catch (error) {
       toast({
@@ -171,12 +171,12 @@ const WebinarCTASection = () => {
                     <CheckCircle2 className="h-8 w-8 text-green-500" />
                   </div>
                   <h3 className="text-2xl font-bold mb-2">
-                    {isKo ? "신청 완료!" : "Registration Complete!"}
+                    {isKo ? "비즈니스 성공을 위한 여정, 이미 절반은 성공하셨습니다." : "You're halfway to success!"}
                   </h3>
                   <p className="text-muted-foreground">
                     {isKo
-                      ? "확인 이메일을 발송해드렸습니다. 곧 만나요!"
-                      : "A confirmation email has been sent. See you soon!"}
+                      ? "접수 완료됐으며 곧 연락드리겠습니다."
+                      : "Request received - we'll be in touch shortly."}
                   </p>
                 </div>
               ) : (
