@@ -69,8 +69,8 @@ interface UserProfile {
 }
 
 const Admin = () => {
-  const { user, signOut, setShowAuthModal, setAuthModalMode } = useAuth();
-  const [loading, setLoading] = useState(true);
+  const { user, signOut, setShowAuthModal, setAuthModalMode, loading: authLoading } = useAuth();
+  const [loading, setLoading] = useState(false);
   const [consultations, setConsultations] = useState<ConsultationRequest[]>([]);
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [refreshing, setRefreshing] = useState(false);
@@ -133,6 +133,15 @@ const Admin = () => {
       minute: "2-digit",
     });
   };
+
+  // AuthContext 로딩 중이면 로딩 스피너 표시
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   if (!user) {
     return (
