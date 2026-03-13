@@ -31,7 +31,7 @@ const defaultResources = [
     file_type: "PDF Report",
     pages: 45,
     icon: Globe,
-    thumbnail_url: "",
+    thumbnail_url: "/downloads/ECDB_Global_E-Commerce_Compass_2026_thumb.png",
     file_path: "/downloads/ECDB_Global_E-Commerce_Compass_2026.pdf",
     is_public: true,
   },
