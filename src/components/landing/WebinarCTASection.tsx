@@ -93,7 +93,7 @@ const WebinarCTASection = () => {
   ];
 
   return (
-    <section id="webinar" className="py-20 bg-gray-50">
+    <section id="webinar" className="py-20 bg-gray-50 scroll-mt-20">
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">

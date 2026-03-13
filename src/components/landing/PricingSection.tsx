@@ -116,11 +116,9 @@ const PricingSection = () => {
                 variant={plan.highlighted ? "gold" : "heroOutline"}
                 size="lg"
                 className="mt-8 w-full"
-                onClick={() => {
-                  document.getElementById('webinar')?.scrollIntoView({ behavior: 'smooth' });
-                }}
+                asChild
               >
-                {t('pricing.consultBtn')}
+                <a href="#webinar">{t('pricing.consultBtn')}</a>
               </Button>
             </div>
           ))}
