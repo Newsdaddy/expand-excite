@@ -10,10 +10,12 @@ interface AuthContextType {
   signUp: (data: SignUpData) => Promise<{ error: Error | null }>;
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
+  resetPassword: (email: string) => Promise<{ error: Error | null }>;
+  updatePassword: (newPassword: string) => Promise<{ error: Error | null }>;
   showAuthModal: boolean;
   setShowAuthModal: (show: boolean) => void;
-  authModalMode: 'login' | 'signup';
-  setAuthModalMode: (mode: 'login' | 'signup') => void;
+  authModalMode: 'login' | 'signup' | 'reset-password' | 'update-password';
+  setAuthModalMode: (mode: 'login' | 'signup' | 'reset-password' | 'update-password') => void;
 }
 
 interface SignUpData {
@@ -42,7 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authModalMode, setAuthModalMode] = useState<'login' | 'signup'>('login');
+  const [authModalMode, setAuthModalMode] = useState<'login' | 'signup' | 'reset-password' | 'update-password'>('login');
 
   useEffect(() => {
     // Get initial session
@@ -123,10 +125,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    setProfile(null);
-    setSession(null);
+    const { error } = await supabase.auth.signOut();
+    if (!error) {
+      setUser(null);
+      setProfile(null);
+      setSession(null);
+      // Force page reload to clear any cached state
+      window.location.href = '/';
+    }
+  };
+
+  const resetPassword = async (email: string): Promise<{ error: Error | null }> => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/resources?mode=update-password`,
+    });
+    return { error };
+  };
+
+  const updatePassword = async (newPassword: string): Promise<{ error: Error | null }> => {
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+    return { error };
   };
 
   return (
@@ -139,6 +159,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         signUp,
         signIn,
         signOut,
+        resetPassword,
+        updatePassword,
         showAuthModal,
         setShowAuthModal,
         authModalMode,

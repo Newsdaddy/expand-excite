@@ -17,6 +17,7 @@ import {
   Users,
   LogOut,
   Loader2,
+  KeyRound,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -109,7 +110,10 @@ const Resources = () => {
   const { language } = useLanguage();
   const isKo = language === 'ko';
   const { toast } = useToast();
-  const { user, profile, signOut, setShowAuthModal, setAuthModalMode } = useAuth();
+  const { user, profile, signOut, resetPassword, setShowAuthModal, setAuthModalMode } = useAuth();
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [passwordEmail, setPasswordEmail] = useState('');
+  const [passwordLoading, setPasswordLoading] = useState(false);
   const [resources, setResources] = useState(defaultResources);
   const [downloading, setDownloading] = useState<string | null>(null);
 
@@ -203,6 +207,27 @@ const Resources = () => {
     setShowAuthModal(true);
   };
 
+  const handlePasswordReset = async () => {
+    if (!user?.email) return;
+    setPasswordLoading(true);
+    const { error } = await resetPassword(user.email);
+    setPasswordLoading(false);
+    if (error) {
+      toast({
+        title: isKo ? '오류' : 'Error',
+        description: error.message,
+        variant: 'destructive',
+      });
+    } else {
+      toast({
+        title: isKo ? '이메일 발송 완료' : 'Email Sent',
+        description: isKo
+          ? '비밀번호 재설정 링크를 이메일로 보냈습니다.'
+          : 'Password reset link has been sent to your email.',
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -222,7 +247,7 @@ const Resources = () => {
 
           {/* User Status Bar */}
           {user ? (
-            <div className="flex items-center justify-center gap-4 mb-8 p-4 rounded-lg bg-green-500/10 border border-green-500/20 max-w-lg mx-auto">
+            <div className="flex items-center justify-center gap-4 mb-8 p-4 rounded-lg bg-green-500/10 border border-green-500/20 max-w-2xl mx-auto">
               <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0" />
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium truncate">
@@ -232,10 +257,27 @@ const Resources = () => {
                   {profile?.company} · {profile?.job_title}
                 </p>
               </div>
-              <Button variant="ghost" size="sm" onClick={signOut} className="flex-shrink-0">
-                <LogOut className="h-4 w-4 mr-1" />
-                {isKo ? '로그아웃' : 'Logout'}
-              </Button>
+              <div className="flex gap-2 flex-shrink-0">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePasswordReset}
+                  disabled={passwordLoading}
+                >
+                  {passwordLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <>
+                      <KeyRound className="h-4 w-4 mr-1" />
+                      {isKo ? '비밀번호 변경' : 'Change Password'}
+                    </>
+                  )}
+                </Button>
+                <Button variant="ghost" size="sm" onClick={signOut}>
+                  <LogOut className="h-4 w-4 mr-1" />
+                  {isKo ? '로그아웃' : 'Logout'}
+                </Button>
+              </div>
             </div>
           ) : (
             <div className="flex items-center justify-center gap-4 mb-8 p-4 rounded-lg bg-muted/50 border border-border max-w-lg mx-auto">

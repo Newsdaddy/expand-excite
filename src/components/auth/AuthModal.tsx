@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Loader2, Mail, Lock, User, Building2, Briefcase, Phone } from 'lucide-react';
+import { Loader2, Mail, Lock, User, Building2, Briefcase, Phone, Eye, EyeOff } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const AuthModal = () => {
@@ -28,6 +28,7 @@ const AuthModal = () => {
   } = useAuth();
 
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -223,16 +224,30 @@ const AuthModal = () => {
               <Lock className="h-4 w-4" />
               {isKo ? '비밀번호' : 'Password'} *
             </Label>
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder={isKo ? '6자 이상' : 'Min 6 characters'}
-              minLength={6}
-              required
-            />
+            <div className="relative">
+              <Input
+                id="password"
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                value={formData.password}
+                onChange={handleChange}
+                placeholder={isKo ? '6자 이상' : 'Min 6 characters'}
+                minLength={6}
+                required
+                className="pr-10"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {showPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
+              </button>
+            </div>
           </div>
 
           {/* Consultation Checkbox (Signup only) */}
