@@ -62,6 +62,32 @@ const defaultResources = [
     file_path: "/downloads/ECDB_E-Commerce_Trends_2026.pdf",
     is_public: true,
   },
+  {
+    id: "3",
+    title: "ECDB Solutions (EN)",
+    titleKo: "ECDB 솔루션 안내 (영문)",
+    description: "Comprehensive overview of ECDB's e-commerce data solutions and services",
+    descKo: "ECDB 이커머스 데이터 솔루션 및 서비스 종합 안내 (영문판)",
+    file_type: "PDF Brochure",
+    pages: 20,
+    icon: FileText,
+    thumbnail_url: "/downloads/ECDB_Solutions_EN_thumb.png",
+    file_path: "/downloads/ECDB_Solutions_EN.pdf",
+    is_public: true,
+  },
+  {
+    id: "4",
+    title: "ECDB Service Guide (KO)",
+    titleKo: "ECDB 서비스 안내 (한글)",
+    description: "Comprehensive overview of ECDB's e-commerce data solutions and services in Korean",
+    descKo: "ECDB 이커머스 데이터 솔루션 및 서비스 종합 안내 (한글판)",
+    file_type: "PDF Brochure",
+    pages: 20,
+    icon: FileText,
+    thumbnail_url: "/downloads/ECDB_Solutions_KO_thumb.png",
+    file_path: "/downloads/ECDB_Solutions_KO.pdf",
+    is_public: true,
+  },
 ];
 
 const iconMap: { [key: string]: any } = {

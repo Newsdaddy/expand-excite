@@ -101,7 +101,7 @@ const translations: Record<Language, Record<string, string>> = {
     'features.f6.desc': '데이터 Export, CRM 연계로 즉시 워크플로우에 활용',
     
     // Pricing Section
-    'pricing.label': 'Pricing',
+    'pricing.label': 'Plans',
     'pricing.title': '비즈니스에 맞는 플랜을 선택하세요',
     'pricing.note': '*연간 결제 기준 · 신용카드 및 현금 송금 결제 가능',
     'pricing.recommended': '추천',
@@ -175,7 +175,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Footer
     'footer.features': 'Features',
     'footer.solutions': 'Solutions',
-    'footer.pricing': 'Pricing',
+    'footer.pricing': 'Plans',
     'footer.contact': 'Contact',
     'footer.privacy': 'Privacy',
     'footer.terms': 'Terms',
@@ -273,7 +273,7 @@ const translations: Record<Language, Record<string, string>> = {
     'features.f6.desc': 'Lead export and CRM integration for immediate sales activation',
 
     // Pricing Section
-    'pricing.label': 'Pricing',
+    'pricing.label': 'Plans',
     'pricing.title': 'Choose the Right Plan for Your Business',
     'pricing.note': '*Based on annual billing · Credit card and wire transfer available',
     'pricing.recommended': 'Recommended',
@@ -347,7 +347,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Footer
     'footer.features': 'Features',
     'footer.solutions': 'Solutions',
-    'footer.pricing': 'Pricing',
+    'footer.pricing': 'Plans',
     'footer.contact': 'Contact',
     'footer.privacy': 'Privacy',
     'footer.terms': 'Terms',
