@@ -30,3 +30,14 @@ export interface Resource {
   file_type: string;
   created_at: string;
 }
+
+export interface DownloadLog {
+  id: string;
+  user_id: string;
+  user_email: string;
+  user_name: string | null;
+  company: string | null;
+  resource_id: string;
+  resource_title: string;
+  downloaded_at: string;
+}

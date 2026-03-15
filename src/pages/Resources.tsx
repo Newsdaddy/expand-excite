@@ -174,6 +174,18 @@ const Resources = () => {
         URL.revokeObjectURL(url);
       }
 
+      // Log download to database
+      if (user) {
+        await supabase.from('download_logs').insert({
+          user_id: user.id,
+          user_email: user.email || '',
+          user_name: profile?.name || null,
+          company: profile?.company || null,
+          resource_id: resource.id,
+          resource_title: isKo ? resource.titleKo : resource.title,
+        });
+      }
+
       toast({
         title: isKo ? '다운로드 완료!' : 'Download Complete!',
         description: isKo ? resource.titleKo : resource.title,

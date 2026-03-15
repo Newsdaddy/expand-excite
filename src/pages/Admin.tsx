@@ -27,6 +27,7 @@ import {
   XCircle,
   RefreshCw,
   AlertTriangle,
+  Download,
 } from "lucide-react";
 import {
   AlertDialog,
@@ -68,11 +69,23 @@ interface UserProfile {
   created_at: string;
 }
 
+interface DownloadLog {
+  id: string;
+  user_id: string;
+  user_email: string;
+  user_name: string | null;
+  company: string | null;
+  resource_id: string;
+  resource_title: string;
+  downloaded_at: string;
+}
+
 const Admin = () => {
   const { user, signOut, setShowAuthModal, setAuthModalMode, loading: authLoading } = useAuth();
   const [loading, setLoading] = useState(false);
   const [consultations, setConsultations] = useState<ConsultationRequest[]>([]);
   const [users, setUsers] = useState<UserProfile[]>([]);
+  const [downloads, setDownloads] = useState<DownloadLog[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
   const isAdmin = user && ADMIN_EMAILS.includes(user.email || "");
@@ -104,6 +117,16 @@ const Admin = () => {
 
       if (userData) {
         setUsers(userData);
+      }
+
+      // Fetch download logs
+      const { data: downloadData, error: downloadError } = await supabase
+        .from("download_logs")
+        .select("*")
+        .order("downloaded_at", { ascending: false });
+
+      if (downloadData) {
+        setDownloads(downloadData);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -214,7 +237,7 @@ const Admin = () => {
       {/* Main Content */}
       <main className="container mx-auto px-6 py-8">
         {/* Stats */}
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
           <div className="bg-card border rounded-xl p-6">
             <div className="flex items-center gap-4">
               <div className="p-3 bg-blue-500/10 rounded-lg">
@@ -234,6 +257,17 @@ const Admin = () => {
               <div>
                 <p className="text-sm text-muted-foreground">가입자</p>
                 <p className="text-3xl font-bold">{users.length}</p>
+              </div>
+            </div>
+          </div>
+          <div className="bg-card border rounded-xl p-6">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-purple-500/10 rounded-lg">
+                <Download className="h-6 w-6 text-purple-500" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">다운로드</p>
+                <p className="text-3xl font-bold">{downloads.length}</p>
               </div>
             </div>
           </div>
@@ -257,6 +291,10 @@ const Admin = () => {
             <TabsTrigger value="users" className="gap-2">
               <Users className="h-4 w-4" />
               가입자 ({users.length})
+            </TabsTrigger>
+            <TabsTrigger value="downloads" className="gap-2">
+              <Download className="h-4 w-4" />
+              다운로드 ({downloads.length})
             </TabsTrigger>
           </TabsList>
 
@@ -343,6 +381,48 @@ const Admin = () => {
                           {user.wants_consultation && (
                             <CheckCircle2 className="h-5 w-5 text-green-500 mx-auto" />
                           )}
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+          </TabsContent>
+
+          {/* Downloads Tab */}
+          <TabsContent value="downloads">
+            <div className="bg-card border rounded-xl overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-[150px]">다운로드 시간</TableHead>
+                    <TableHead>이름</TableHead>
+                    <TableHead>회사</TableHead>
+                    <TableHead>이메일</TableHead>
+                    <TableHead>다운로드 파일</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {downloads.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
+                        다운로드 기록이 없습니다.
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    downloads.map((item) => (
+                      <TableRow key={item.id}>
+                        <TableCell className="text-sm">{formatDate(item.downloaded_at)}</TableCell>
+                        <TableCell className="font-medium">{item.user_name || "-"}</TableCell>
+                        <TableCell>{item.company || "-"}</TableCell>
+                        <TableCell>
+                          <a href={`mailto:${item.user_email}`} className="text-primary hover:underline">
+                            {item.user_email}
+                          </a>
+                        </TableCell>
+                        <TableCell className="font-medium text-purple-600">
+                          {item.resource_title}
                         </TableCell>
                       </TableRow>
                     ))
