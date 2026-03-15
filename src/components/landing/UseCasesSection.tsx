@@ -16,17 +16,7 @@ import {
   Check,
 } from "lucide-react";
 
-// Import use case images (300 DPI high-resolution PNG)
-import slide41 from "@/assets/use-cases/Slide41.png";
-import slide42 from "@/assets/use-cases/Slide42.png";
-import slide43 from "@/assets/use-cases/Slide43.png";
-import slide44 from "@/assets/use-cases/Slide44.png";
-import slide45 from "@/assets/use-cases/Slide45.png";
-import slide46 from "@/assets/use-cases/Slide46.png";
-import slide47 from "@/assets/use-cases/Slide47.png";
-import slide48 from "@/assets/use-cases/Slide48.png";
-import slide49 from "@/assets/use-cases/Slide49.png";
-import slide50 from "@/assets/use-cases/Slide50.png";
+// Use case images (300 DPI, cropped - no header/footer)
 
 const useCases = [
   {
@@ -34,7 +24,8 @@ const useCases = [
     icon: Store,
     labelEn: "Retail",
     labelKo: "리테일",
-    image: slide42,
+    imageKo: "/images/usecase_42_cropped.png",
+    imageEn: "/images/usecase_en_42_cropped.png",
     titleEn: "Your Retail Needs, Solved With Data",
     titleKo: "리테일 니즈, 데이터로 해결",
     subtitleEn: "Access all your market and competitor data in one place.",
@@ -53,7 +44,8 @@ const useCases = [
     icon: Factory,
     labelEn: "Manufacturing",
     labelKo: "제조",
-    image: slide43,
+    imageKo: "/images/usecase_43_cropped.png",
+    imageEn: "/images/usecase_en_43_cropped.png",
     titleEn: "Retail & Market Data at Your Fingertips",
     titleKo: "손끝에서 만나는 리테일 & 시장 데이터",
     subtitleEn: "Access all your retail partner and market data in one platform.",
@@ -72,7 +64,8 @@ const useCases = [
     icon: Megaphone,
     labelEn: "Agency",
     labelKo: "에이전시",
-    image: slide44,
+    imageKo: "/images/usecase_44_cropped.png",
+    imageEn: "/images/usecase_en_44_cropped.png",
     titleEn: "Drive Your Agency's Success with Data",
     titleKo: "데이터로 에이전시 성공을 이끄세요",
     subtitleEn: "Equip your team with reliable data for real-time problem-solving and impactful strategies.",
@@ -91,7 +84,8 @@ const useCases = [
     icon: Briefcase,
     labelEn: "Consultancy",
     labelKo: "컨설팅",
-    image: slide45,
+    imageKo: "/images/usecase_45_cropped.png",
+    imageEn: "/images/usecase_en_45_cropped.png",
     titleEn: "Gain Industry Expertise with Trusted Data",
     titleKo: "실거래 데이터 기반 커머스 시장 CDD",
     subtitleEn: "Gain industry expertise quickly with reliable, easy-to-use market intelligence, trusted by Stanford and McKinsey.",
@@ -110,7 +104,8 @@ const useCases = [
     icon: Code,
     labelEn: "Software & Tech",
     labelKo: "소프트웨어 & 테크",
-    image: slide46,
+    imageKo: "/images/usecase_46_cropped.png",
+    imageEn: "/images/usecase_en_46_cropped.png",
     titleEn: "Unlock High-Potential Leads & Markets",
     titleKo: "고잠재력 리드 & 시장 발굴",
     subtitleEn: "ECDB's retailer rankings and filtering features help you easily identify high-potential leads and markets.",
@@ -129,7 +124,8 @@ const useCases = [
     icon: Truck,
     labelEn: "Shipping & Logistics",
     labelKo: "배송 & 물류",
-    image: slide47,
+    imageKo: "/images/usecase_47_cropped.png",
+    imageEn: "/images/usecase_en_47_cropped.png",
     titleEn: "Optimize Your Shipping & Logistics Operations",
     titleKo: "배송 & 물류 운영 최적화",
     subtitleEn: "Our market intelligence helps you identify key contacts, analyze provider networks, and plan for demand fluctuations.",
@@ -148,7 +144,8 @@ const useCases = [
     icon: CreditCard,
     labelEn: "Payment",
     labelKo: "결제",
-    image: slide48,
+    imageKo: "/images/usecase_48_cropped.png",
+    imageEn: "/images/usecase_en_48_cropped.png",
     titleEn: "Accelerate Growth in Your Payment Business",
     titleKo: "결제 비즈니스 성장 가속화",
     subtitleEn: "Gain insights into payment trends, identify growth opportunities, and find the right leads with filterable rankings.",
@@ -167,7 +164,8 @@ const useCases = [
     icon: GraduationCap,
     labelEn: "University & Institution",
     labelKo: "대학 & 기관",
-    image: slide49,
+    imageKo: "/images/usecase_49_cropped.png",
+    imageEn: "/images/usecase_en_49_cropped.png",
     titleEn: "Boost Academic Research with Data",
     titleKo: "데이터로 학술 연구 강화",
     subtitleEn: "Equip your students with a top-tier platform for analyzing online transactions and e-commerce.",
@@ -186,7 +184,8 @@ const useCases = [
     icon: TrendingUp,
     labelEn: "Finance & Investment",
     labelKo: "금융 & 투자",
-    image: slide50,
+    imageKo: "/images/usecase_50_cropped.png",
+    imageEn: "/images/usecase_en_50_cropped.png",
     titleEn: "Spot High-Value Investments with Data",
     titleKo: "검증된 데이터 기반 밸류에이션",
     subtitleEn: "Leverage our monthly updated e-commerce data to track market trends, evaluate companies, and uncover high-potential investment opportunities.",
@@ -207,13 +206,13 @@ const UseCasesSection = () => {
   const isKo = language === "ko";
   const [activeUseCase, setActiveUseCase] = useState(useCases[0]);
 
-  // Korean version: Long scroll with all content
+  // Korean version: PDF 슬라이드 이미지 그대로 표시
   if (isKo) {
     return (
       <section id="use-cases" className="py-20 bg-white">
         <div className="container mx-auto px-6">
           {/* Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
               <Building2 className="h-4 w-4 text-primary" />
               <span className="text-sm font-medium text-primary">
@@ -227,56 +226,41 @@ const UseCasesSection = () => {
             </h2>
           </div>
 
-          {/* All Use Cases - Vertical Scroll */}
-          <div className="space-y-16">
-            {useCases.map((useCase, index) => {
+          {/* Industry Tabs */}
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            {useCases.map((useCase) => {
               const Icon = useCase.icon;
+              const isActive = activeUseCase.id === useCase.id;
               return (
-                <div key={useCase.id} className="bg-gray-50 rounded-2xl p-8 md:p-12">
-                  {/* Industry Header */}
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Use Case {index + 1}</p>
-                      <h3 className="text-xl font-bold">{useCase.labelKo}{useCase.id !== "university" ? " 기업" : ""}</h3>
-                    </div>
-                  </div>
-
-                  {/* Title & Subtitle */}
-                  <h4 className="text-2xl md:text-3xl font-bold mb-4">
-                    <span className="text-primary">{useCase.titleKo.split(',')[0]}</span>
-                    {useCase.titleKo.includes(',') && <span className="text-gray-900">, {useCase.titleKo.split(',')[1]}</span>}
-                  </h4>
-                  <p className="text-muted-foreground text-lg mb-6">
-                    {useCase.subtitleKo}
-                  </p>
-
-                  {/* Clients */}
-                  <p className="text-sm text-muted-foreground mb-8">
-                    <span className="font-medium">주요 고객사:</span> {useCase.clientsKo}
-                  </p>
-
-                  {/* Benefits Grid */}
-                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {useCase.benefits.map((benefit, bIndex) => (
-                      <div key={bIndex} className="bg-white rounded-xl p-5 border border-gray-200">
-                        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-                          <Check className="h-4 w-4 text-primary" />
-                        </div>
-                        <h5 className="font-semibold mb-2">{benefit.titleKo}</h5>
-                        <p className="text-sm text-muted-foreground">{benefit.descKo}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <button
+                  key={useCase.id}
+                  onClick={() => setActiveUseCase(useCase)}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                    isActive
+                      ? "bg-primary text-primary-foreground shadow-lg"
+                      : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
+                >
+                  <Icon className="h-4 w-4" />
+                  {useCase.labelKo}
+                </button>
               );
             })}
           </div>
 
+          {/* PDF 슬라이드 이미지 표시 */}
+          <div className="max-w-6xl mx-auto">
+            <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+              <img
+                src={activeUseCase.imageKo}
+                alt={`${activeUseCase.labelKo} 활용 사례`}
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+
           {/* CTA */}
-          <div className="text-center mt-16">
+          <div className="text-center mt-12">
             <Button variant="gold" size="lg" className="gap-2" asChild>
               <a href="#webinar">
                 온라인 컨설팅에서 자세히 보기
@@ -337,7 +321,7 @@ const UseCasesSection = () => {
         <div className="max-w-5xl mx-auto">
           <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
             <img
-              src={activeUseCase.image}
+              src={activeUseCase.imageEn}
               alt={`${activeUseCase.labelEn} Use Case`}
               className="w-full h-auto"
             />

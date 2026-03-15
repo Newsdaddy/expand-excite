@@ -6,7 +6,8 @@ import SolutionDetailSection from "@/components/landing/SolutionDetailSection";
 import UseCasesSection from "@/components/landing/UseCasesSection";
 import FeaturesSection from "@/components/landing/FeaturesSection";
 import ROISection from "@/components/landing/ROISection";
-// import TestimonialsSection from "@/components/landing/TestimonialsSection";
+import TestimonialsSection from "@/components/landing/TestimonialsSection";
+import ClientsSection from "@/components/landing/ClientsSection";
 import PricingSection from "@/components/landing/PricingSection";
 import WebinarCTASection from "@/components/landing/WebinarCTASection";
 import Footer from "@/components/landing/Footer";
@@ -37,8 +38,11 @@ const Index = () => {
         {/* ROI - 비용 절감/매출 창출 */}
         <ROISection />
 
-        {/* Testimonials & Customer Logos - 임시 비활성화 */}
-        {/* <TestimonialsSection /> */}
+        {/* Testimonials & Customer Logos */}
+        <TestimonialsSection />
+
+        {/* Clients - 구독 기업 */}
+        <ClientsSection />
 
         {/* Pricing */}
         <PricingSection />
