@@ -120,13 +120,20 @@ const Admin = () => {
       }
 
       // Fetch download logs
-      const { data: downloadData, error: downloadError } = await supabase
-        .from("download_logs")
-        .select("*")
-        .order("downloaded_at", { ascending: false });
+      try {
+        const { data: downloadData, error: downloadError } = await supabase
+          .from("download_logs")
+          .select("*")
+          .order("downloaded_at", { ascending: false });
 
-      if (downloadData) {
-        setDownloads(downloadData);
+        if (downloadError) {
+          console.error("Download logs error:", downloadError);
+        } else if (downloadData) {
+          setDownloads(downloadData);
+        }
+      } catch (dlError) {
+        console.error("Download logs fetch failed:", dlError);
+        // Continue even if download_logs fails
       }
     } catch (error) {
       console.error("Error fetching data:", error);
