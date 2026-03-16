@@ -88,6 +88,19 @@ const defaultResources = [
     file_path: "/downloads/ECDB_Solutions_KO.pdf",
     is_public: true,
   },
+  {
+    id: "5",
+    title: "AI Agent Initial Setup Guide",
+    titleKo: "AI 에이전트 초기 셋업 가이드",
+    description: "Step-by-step guide to set up Claude Code AI agent development environment - even a 9-year-old can follow",
+    descKo: "9살도 따라하는 Claude Code AI 에이전트 개발 환경 초기 셋업 가이드",
+    file_type: "PDF Guide",
+    pages: 10,
+    icon: FileText,
+    thumbnail_url: "/downloads/AI_Agent_Setup_Guide_thumb.png",
+    file_path: "/downloads/AI_Agent_Setup_Guide_KO.pdf",
+    is_public: true,
+  },
 ];
 
 const iconMap: { [key: string]: any } = {
