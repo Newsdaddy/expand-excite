@@ -92,20 +92,10 @@ const Admin = () => {
   const isAdmin = user && ADMIN_EMAILS.includes(user.email || "");
 
   useEffect(() => {
-    let isMounted = true;
-
-    if (user && isAdmin && isMounted) {
-      // 약간의 딜레이로 중복 요청 방지
-      const timer = setTimeout(() => {
-        if (isMounted) fetchData();
-      }, 100);
-
-      return () => {
-        isMounted = false;
-        clearTimeout(timer);
-      };
+    if (user && isAdmin) {
+      fetchData();
     }
-  }, [user?.id, isAdmin]);
+  }, [user, isAdmin]);
 
   const fetchData = async () => {
     setRefreshing(true);
