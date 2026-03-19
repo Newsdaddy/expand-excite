@@ -101,6 +101,19 @@ const defaultResources = [
     file_path: "/downloads/AI_Agent_Setup_Cursor_Claude_Code.pdf",
     is_public: true,
   },
+  {
+    id: "6",
+    title: "ECDB E-Commerce in Europe 2026",
+    titleKo: "ECDB 유럽 이커머스 리포트 2026",
+    description: "Comprehensive analysis of European e-commerce market trends, growth drivers, and regional insights for 2026",
+    descKo: "2026년 유럽 이커머스 시장 트렌드, 성장 동력 및 지역별 인사이트 종합 분석",
+    file_type: "PDF Report",
+    pages: 35,
+    icon: Globe,
+    thumbnail_url: "/downloads/ECDB_E-Commerce_in_Europe_2026_thumb.png",
+    file_path: "/downloads/ECDB_E-Commerce_in_Europe_2026.pdf",
+    is_public: true,
+  },
 ];
 
 const iconMap: { [key: string]: any } = {

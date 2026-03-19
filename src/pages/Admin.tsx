@@ -87,6 +87,7 @@ const Admin = () => {
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [downloads, setDownloads] = useState<DownloadLog[]>([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [errors, setErrors] = useState<string[]>([]);
 
   const isAdmin = user && ADMIN_EMAILS.includes(user.email || "");
 
@@ -98,6 +99,8 @@ const Admin = () => {
 
   const fetchData = async () => {
     setRefreshing(true);
+    const newErrors: string[] = [];
+
     try {
       // Fetch consultation requests
       const { data: consultData, error: consultError } = await supabase
@@ -105,7 +108,10 @@ const Admin = () => {
         .select("*")
         .order("created_at", { ascending: false });
 
-      if (consultData) {
+      if (consultError) {
+        console.error("Consultation error:", consultError);
+        newErrors.push(`컨설팅: ${consultError.message}`);
+      } else if (consultData) {
         setConsultations(consultData);
       }
 
@@ -115,29 +121,30 @@ const Admin = () => {
         .select("*")
         .order("created_at", { ascending: false });
 
-      if (userData) {
+      if (userError) {
+        console.error("Profiles error:", userError);
+        newErrors.push(`가입자: ${userError.message}`);
+      } else if (userData) {
         setUsers(userData);
       }
 
       // Fetch download logs
-      try {
-        const { data: downloadData, error: downloadError } = await supabase
-          .from("download_logs")
-          .select("*")
-          .order("downloaded_at", { ascending: false });
+      const { data: downloadData, error: downloadError } = await supabase
+        .from("download_logs")
+        .select("*")
+        .order("downloaded_at", { ascending: false });
 
-        if (downloadError) {
-          console.error("Download logs error:", downloadError);
-        } else if (downloadData) {
-          setDownloads(downloadData);
-        }
-      } catch (dlError) {
-        console.error("Download logs fetch failed:", dlError);
-        // Continue even if download_logs fails
+      if (downloadError) {
+        console.error("Download logs error:", downloadError);
+        newErrors.push(`다운로드: ${downloadError.message}`);
+      } else if (downloadData) {
+        setDownloads(downloadData);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
+      newErrors.push(`전체 오류: ${(error as Error).message}`);
     } finally {
+      setErrors(newErrors);
       setLoading(false);
       setRefreshing(false);
     }
@@ -243,6 +250,26 @@ const Admin = () => {
 
       {/* Main Content */}
       <main className="container mx-auto px-6 py-8">
+        {/* Error Banner */}
+        {errors.length > 0 && (
+          <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-medium text-red-500 mb-1">데이터 로딩 오류</p>
+                <ul className="text-sm text-muted-foreground space-y-1">
+                  {errors.map((err, i) => (
+                    <li key={i}>{err}</li>
+                  ))}
+                </ul>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Supabase RLS 정책을 확인하세요. 모든 테이블에 "Allow authenticated read" 정책이 필요합니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Stats */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <div className="bg-card border rounded-xl p-6">
