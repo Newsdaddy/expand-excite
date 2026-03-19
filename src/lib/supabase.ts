@@ -14,8 +14,10 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     autoRefreshToken: true,
     detectSessionInUrl: true,
     flowType: 'pkce',
-    lock: {
-      acquireLockMaxTimeMs: 5000,
+  },
+  global: {
+    headers: {
+      'x-client-info': 'ecdb-apac',
     },
   },
 });

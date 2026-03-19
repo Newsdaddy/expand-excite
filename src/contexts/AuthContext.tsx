@@ -47,36 +47,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [authModalMode, setAuthModalMode] = useState<'login' | 'signup' | 'reset-password' | 'update-password'>('login');
 
   useEffect(() => {
-    // Get initial session with error handling
-    supabase.auth.getSession()
-      .then(({ data: { session }, error }) => {
-        if (error) {
-          console.error('Session error:', error);
-        }
-        setSession(session);
-        setUser(session?.user ?? null);
-        if (session?.user) {
-          fetchProfile(session.user.id);
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Failed to get session:', error);
-        setLoading(false);
-      });
-
     // Timeout fallback - if session check takes too long, stop loading
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 5000);
 
-    // Listen for auth changes
+    // Listen for auth changes (includes INITIAL_SESSION event)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('Auth event:', event);
         setSession(session);
         setUser(session?.user ?? null);
         if (session?.user) {
-          await fetchProfile(session.user.id);
+          // Use setTimeout to avoid Supabase lock issues
+          setTimeout(() => {
+            fetchProfile(session.user.id);
+          }, 0);
         } else {
           setProfile(null);
         }

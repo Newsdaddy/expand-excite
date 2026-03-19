@@ -97,44 +97,56 @@ const Admin = () => {
     }
   }, [user, isAdmin]);
 
-  const fetchData = async () => {
+  const fetchData = async (retryCount = 0) => {
     setRefreshing(true);
     const newErrors: string[] = [];
 
     try {
-      // Fetch consultation requests
+      // Fetch all data sequentially to avoid lock conflicts
       const { data: consultData, error: consultError } = await supabase
         .from("consultation_requests")
         .select("*")
         .order("created_at", { ascending: false });
 
-      if (consultError && !consultError.message?.includes('AbortError')) {
-        console.error("Consultation error:", consultError);
-        newErrors.push(`컨설팅: ${consultError.message}`);
+      if (consultError) {
+        if (consultError.message?.includes('AbortError') || consultError.message?.includes('Lock')) {
+          // Retry on lock errors
+          if (retryCount < 3) {
+            console.log(`Retrying fetchData (${retryCount + 1}/3)...`);
+            setTimeout(() => fetchData(retryCount + 1), 500);
+            return;
+          }
+        } else {
+          console.error("Consultation error:", consultError);
+          newErrors.push(`컨설팅: ${consultError.message}`);
+        }
       } else if (consultData) {
         setConsultations(consultData);
       }
 
-      // Fetch user profiles
+      // Small delay between requests
+      await new Promise(r => setTimeout(r, 100));
+
       const { data: userData, error: userError } = await supabase
         .from("profiles")
         .select("*")
         .order("created_at", { ascending: false });
 
-      if (userError && !userError.message?.includes('AbortError')) {
+      if (userError && !userError.message?.includes('AbortError') && !userError.message?.includes('Lock')) {
         console.error("Profiles error:", userError);
         newErrors.push(`가입자: ${userError.message}`);
       } else if (userData) {
         setUsers(userData);
       }
 
-      // Fetch download logs
+      await new Promise(r => setTimeout(r, 100));
+
       const { data: downloadData, error: downloadError } = await supabase
         .from("download_logs")
         .select("*")
         .order("downloaded_at", { ascending: false });
 
-      if (downloadError && !downloadError.message?.includes('AbortError')) {
+      if (downloadError && !downloadError.message?.includes('AbortError') && !downloadError.message?.includes('Lock')) {
         console.error("Download logs error:", downloadError);
         newErrors.push(`다운로드: ${downloadError.message}`);
       } else if (downloadData) {
@@ -142,7 +154,13 @@ const Admin = () => {
       }
     } catch (error) {
       const errMsg = (error as Error).message;
-      if (!errMsg?.includes('AbortError')) {
+      if (errMsg?.includes('AbortError') || errMsg?.includes('Lock')) {
+        if (retryCount < 3) {
+          console.log(`Retrying fetchData (${retryCount + 1}/3)...`);
+          setTimeout(() => fetchData(retryCount + 1), 500);
+          return;
+        }
+      } else {
         console.error("Error fetching data:", error);
         newErrors.push(`전체 오류: ${errMsg}`);
       }
