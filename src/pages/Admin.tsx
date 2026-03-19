@@ -92,10 +92,20 @@ const Admin = () => {
   const isAdmin = user && ADMIN_EMAILS.includes(user.email || "");
 
   useEffect(() => {
-    if (user && isAdmin) {
-      fetchData();
+    let isMounted = true;
+
+    if (user && isAdmin && isMounted) {
+      // 약간의 딜레이로 중복 요청 방지
+      const timer = setTimeout(() => {
+        if (isMounted) fetchData();
+      }, 100);
+
+      return () => {
+        isMounted = false;
+        clearTimeout(timer);
+      };
     }
-  }, [user, isAdmin]);
+  }, [user?.id, isAdmin]);
 
   const fetchData = async () => {
     setRefreshing(true);
@@ -108,7 +118,7 @@ const Admin = () => {
         .select("*")
         .order("created_at", { ascending: false });
 
-      if (consultError) {
+      if (consultError && !consultError.message?.includes('AbortError')) {
         console.error("Consultation error:", consultError);
         newErrors.push(`컨설팅: ${consultError.message}`);
       } else if (consultData) {
@@ -121,7 +131,7 @@ const Admin = () => {
         .select("*")
         .order("created_at", { ascending: false });
 
-      if (userError) {
+      if (userError && !userError.message?.includes('AbortError')) {
         console.error("Profiles error:", userError);
         newErrors.push(`가입자: ${userError.message}`);
       } else if (userData) {
@@ -134,15 +144,18 @@ const Admin = () => {
         .select("*")
         .order("downloaded_at", { ascending: false });
 
-      if (downloadError) {
+      if (downloadError && !downloadError.message?.includes('AbortError')) {
         console.error("Download logs error:", downloadError);
         newErrors.push(`다운로드: ${downloadError.message}`);
       } else if (downloadData) {
         setDownloads(downloadData);
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
-      newErrors.push(`전체 오류: ${(error as Error).message}`);
+      const errMsg = (error as Error).message;
+      if (!errMsg?.includes('AbortError')) {
+        console.error("Error fetching data:", error);
+        newErrors.push(`전체 오류: ${errMsg}`);
+      }
     } finally {
       setErrors(newErrors);
       setLoading(false);
