@@ -54,6 +54,7 @@ const AuthModal = () => {
     setAuthModalMode,
     signIn,
     signUp,
+    resetPassword,
   } = useAuth();
 
   const [loading, setLoading] = useState(false);
@@ -79,6 +80,25 @@ const AuthModal = () => {
     setLoading(true);
 
     try {
+      if (authModalMode === 'reset-password') {
+        const { error } = await resetPassword(formData.email);
+        if (error) {
+          toast({
+            title: isKo ? '비밀번호 재설정 실패' : 'Password Reset Failed',
+            description: error.message,
+            variant: 'destructive',
+          });
+        } else {
+          toast({
+            title: isKo ? '이메일 전송 완료!' : 'Email Sent!',
+            description: isKo ? '이메일을 확인하여 비밀번호를 재설정하세요.' : 'Check your email to reset your password.',
+          });
+          setAuthModalMode('login');
+        }
+        setLoading(false);
+        return;
+      }
+
       if (authModalMode === 'login') {
         const { error } = await signIn(formData.email, formData.password);
         if (error) {
@@ -93,7 +113,7 @@ const AuthModal = () => {
             description: isKo ? '환영합니다.' : 'Welcome back.',
           });
         }
-      } else {
+      } else if (authModalMode === 'signup') {
         // Validation
         if (!formData.name || !formData.email || !formData.company || !formData.job_title || !formData.password) {
           toast({
@@ -165,6 +185,8 @@ const AuthModal = () => {
           <DialogTitle className="text-xl font-bold text-center">
             {authModalMode === 'login'
               ? isKo ? '로그인' : 'Login'
+              : authModalMode === 'reset-password'
+              ? isKo ? '비밀번호 찾기' : 'Reset Password'
               : isKo ? '회원가입' : 'Sign Up'}
           </DialogTitle>
         </DialogHeader>
@@ -278,37 +300,39 @@ const AuthModal = () => {
             />
           </div>
 
-          {/* Password */}
-          <div className="space-y-2">
-            <Label htmlFor="password" className="flex items-center gap-2">
-              <Lock className="h-4 w-4" />
-              {isKo ? '비밀번호' : 'Password'} *
-            </Label>
-            <div className="relative">
-              <Input
-                id="password"
-                name="password"
-                type={showPassword ? 'text' : 'password'}
-                value={formData.password}
-                onChange={handleChange}
-                placeholder={isKo ? '6자 이상' : 'Min 6 characters'}
-                minLength={6}
-                required
-                className="pr-10"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {showPassword ? (
-                  <EyeOff className="h-4 w-4" />
-                ) : (
-                  <Eye className="h-4 w-4" />
-                )}
-              </button>
+          {/* Password (not shown in reset-password mode) */}
+          {authModalMode !== 'reset-password' && (
+            <div className="space-y-2">
+              <Label htmlFor="password" className="flex items-center gap-2">
+                <Lock className="h-4 w-4" />
+                {isKo ? '비밀번호' : 'Password'} *
+              </Label>
+              <div className="relative">
+                <Input
+                  id="password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder={isKo ? '6자 이상' : 'Min 6 characters'}
+                  minLength={6}
+                  required
+                  className="pr-10"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
+                </button>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Consultation Checkbox (Signup only) */}
           {authModalMode === 'signup' && (
@@ -337,26 +361,49 @@ const AuthModal = () => {
               </>
             ) : authModalMode === 'login' ? (
               isKo ? '로그인' : 'Login'
+            ) : authModalMode === 'reset-password' ? (
+              isKo ? '비밀번호 재설정 이메일 보내기' : 'Send Reset Email'
             ) : (
               isKo ? '회원가입' : 'Sign Up'
             )}
           </Button>
 
           {/* Switch Mode */}
-          <div className="text-center text-sm text-muted-foreground pt-2">
+          <div className="text-center text-sm text-muted-foreground pt-2 space-y-2">
             {authModalMode === 'login' ? (
               <>
-                {isKo ? '계정이 없으신가요?' : "Don't have an account?"}{' '}
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => { resetForm(); setAuthModalMode('reset-password'); }}
+                    className="text-muted-foreground hover:text-primary hover:underline"
+                  >
+                    {isKo ? '비밀번호를 잊으셨나요?' : 'Forgot password?'}
+                  </button>
+                </div>
+                <div>
+                  {isKo ? '계정이 없으신가요?' : "Don't have an account?"}{' '}
+                  <button
+                    type="button"
+                    onClick={switchMode}
+                    className="text-primary hover:underline font-medium"
+                  >
+                    {isKo ? '회원가입' : 'Sign Up'}
+                  </button>
+                </div>
+              </>
+            ) : authModalMode === 'reset-password' ? (
+              <div>
                 <button
                   type="button"
-                  onClick={switchMode}
+                  onClick={() => { resetForm(); setAuthModalMode('login'); }}
                   className="text-primary hover:underline font-medium"
                 >
-                  {isKo ? '회원가입' : 'Sign Up'}
+                  {isKo ? '로그인으로 돌아가기' : 'Back to Login'}
                 </button>
-              </>
+              </div>
             ) : (
-              <>
+              <div>
                 {isKo ? '이미 계정이 있으신가요?' : 'Already have an account?'}{' '}
                 <button
                   type="button"
@@ -365,7 +412,7 @@ const AuthModal = () => {
                 >
                   {isKo ? '로그인' : 'Login'}
                 </button>
-              </>
+              </div>
             )}
           </div>
         </form>
