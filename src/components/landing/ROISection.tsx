@@ -70,8 +70,8 @@ const calculations = [
     titleEn: "External Research Cost",
     beforeKo: "€30,000 - €100,000/년",
     beforeEn: "€30,000 - €100,000/year",
-    afterKo: "€0 (ECDB 제외)",
-    afterEn: "€0 (excluding ECDB)",
+    afterKo: "€0",
+    afterEn: "€0",
     savingsKo: "€30K - €100K/년 절약",
     savingsEn: "€30K - €100K/year saved",
   },
@@ -105,20 +105,20 @@ const ROISection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             {isKo ? (
               <>
-                <span className="text-gray-600">수치화 가능한</span>{" "}
-                <span className="text-gray-900">성과</span>
+                <span className="text-gray-600">구독 기업들의</span>{" "}
+                <span className="text-gray-900">실제 성과</span>
               </>
             ) : (
               <>
-                <span className="text-gray-600">Clear Returns on</span>{" "}
-                <span className="text-gray-900">Your Investment</span>
+                <span className="text-gray-600">Real Results from</span>{" "}
+                <span className="text-gray-900">Our Subscribers</span>
               </>
             )}
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             {isKo
-              ? "ECDB 도입 기업들의 실제 성과를 바탕으로 계산한 ROI입니다"
-              : "ROI calculated based on actual results from companies using ECDB"}
+              ? "실제 성과를 바탕으로 계산한 ROI입니다"
+              : "ROI calculated based on actual results"}
           </p>
         </div>
 
@@ -172,10 +172,10 @@ const ROISection = () => {
                       {isKo ? "항목" : "Category"}
                     </th>
                     <th className="text-center px-4 py-4 text-sm font-medium text-red-400">
-                      {isKo ? "Before ECDB" : "Before ECDB"}
+                      Before
                     </th>
                     <th className="text-center px-4 py-4 text-sm font-medium text-green-400">
-                      {isKo ? "After ECDB" : "After ECDB"}
+                      After
                     </th>
                     <th className="text-center px-4 py-4 text-sm font-medium text-primary">
                       {isKo ? "절감 효과" : "Savings"}
@@ -211,7 +211,7 @@ const ROISection = () => {
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">
-                    {isKo ? "ECDB 연간 비용 대비 예상 ROI" : "Expected ROI vs. ECDB Annual Cost"}
+                    {isKo ? "연간 비용 대비 예상 ROI" : "Expected ROI vs. Annual Cost"}
                   </p>
                   <div className="flex items-baseline gap-2">
                     <span className="text-3xl font-bold text-primary">500%+</span>
@@ -236,8 +236,8 @@ const ROISection = () => {
           <Users className="h-4 w-4 text-muted-foreground" />
           <p className="text-sm text-muted-foreground">
             {isKo
-              ? "전세계 500+ 기업이 ECDB로 비용을 절감하고 있습니다"
-              : "500+ companies worldwide are saving costs with ECDB"}
+              ? "전세계 500+ 기업이 비용을 절감하고 있습니다"
+              : "500+ companies worldwide are saving costs"}
           </p>
         </div>
       </div>

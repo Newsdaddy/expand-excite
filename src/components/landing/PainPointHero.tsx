@@ -150,7 +150,7 @@ const PainPointHero = () => {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">
-                  {isKo ? "ECDB 도입 후" : "After ECDB"}
+                  {isKo ? "솔루션 도입 후" : "After Solution"}
                 </p>
                 <p className="text-lg font-semibold text-primary">
                   {isKo ? activePersona.resultKo : activePersona.resultEn}

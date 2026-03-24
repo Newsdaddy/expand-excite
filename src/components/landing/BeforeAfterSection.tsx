@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 const comparisons = [
   {
     beforeKo: "생성형AI에서 데이터 수집 및 검증 → 최대 2주",
-    afterKo: "ECDB에서 한 번에 → 5분 이내",
+    afterKo: "한 번에 → 5분 이내",
     beforeEn: "Collecting & verifying data from GenAI → Up to 2 weeks",
-    afterEn: "All in ECDB → Under 5 minutes",
+    afterEn: "All at once → Under 5 minutes",
     category: "time",
   },
   {
@@ -113,7 +113,7 @@ const BeforeAfterSection = () => {
                       <Check className="h-4 w-4 text-green-500" />
                     </div>
                     <div>
-                      <p className="text-xs text-muted-foreground mb-1">After ECDB</p>
+                      <p className="text-xs text-muted-foreground mb-1">After</p>
                       <p className="text-foreground font-medium">
                         {isKo ? item.afterKo : item.afterEn}
                       </p>
