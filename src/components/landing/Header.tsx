@@ -4,20 +4,13 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, ExternalLink } from "lucide-react";
 import LanguageToggle from "@/components/LanguageToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useAuth } from "@/contexts/AuthContext";
 import ECDBLogo from "@/components/ECDBLogo";
 import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const { t } = useLanguage();
-  const { user, signOut, setShowAuthModal, setAuthModalMode } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-
-  const handleLoginClick = () => {
-    setAuthModalMode('login');
-    setShowAuthModal(true);
-  };
 
   const mainTabs = [
     { path: "/", label: t('nav.sales') },
@@ -67,15 +60,6 @@ const Header = () => {
 
         <div className="hidden items-center gap-3 md:flex">
           <LanguageToggle />
-          {user ? (
-            <Button variant="ghost" size="sm" onClick={signOut}>
-              {t('nav.logout')}
-            </Button>
-          ) : (
-            <Button variant="ghost" size="sm" onClick={handleLoginClick}>
-              {t('nav.login')}
-            </Button>
-          )}
           <Button variant="gold" size="sm" asChild>
             <a href="#webinar">{t('nav.webinar')}</a>
           </Button>
@@ -118,15 +102,6 @@ const Header = () => {
                   <ExternalLink className="h-4 w-4" />
                 </a>
                 <div className="mt-6 flex flex-col gap-3 px-4">
-                  {user ? (
-                    <Button variant="ghost" className="justify-start" onClick={() => { signOut(); setIsOpen(false); }}>
-                      {t('nav.logout')}
-                    </Button>
-                  ) : (
-                    <Button variant="ghost" className="justify-start" onClick={() => { handleLoginClick(); setIsOpen(false); }}>
-                      {t('nav.login')}
-                    </Button>
-                  )}
                   <Button variant="gold" asChild>
                     <a href="#webinar" onClick={() => setIsOpen(false)}>
                       {t('nav.webinar')}
