@@ -373,7 +373,7 @@ const Resources = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              {isKo ? "무료 자료" : "Free Resources"}
+              {isKo ? "성장 자료" : "Growth Resources"}
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               {isKo
