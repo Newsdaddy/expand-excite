@@ -1,4 +1,4 @@
-import { Check, Users, Zap, Database, BarChart3, Bot, Headphones, Globe, Puzzle, Download, Server } from "lucide-react";
+import { Check, Users, Zap, Database, BarChart3, Bot, Headphones, Globe, Puzzle, Download, Server, Plus, ShoppingCart, Layers, UserSearch } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -8,18 +8,19 @@ const PricingSection = () => {
 
   const features = [
     {
-      category: isKo ? "시트 & 크레딧" : "Seats & Credits",
-      items: [
-        { icon: Users, label: isKo ? "5 시트" : "5 Seats" },
-        { icon: Zap, label: isKo ? "월 5,000 크레딧" : "5,000 Monthly Credits" },
-      ],
-    },
-    {
-      category: isKo ? "데이터 접근" : "Data Access",
+      category: isKo ? "데이터 종류" : "Data Types",
       items: [
         { icon: Database, label: isKo ? "리테일 데이터" : "Retail Data" },
         { icon: Database, label: isKo ? "마켓 데이터" : "Market Data" },
+        { icon: BarChart3, label: isKo ? "실거래 데이터" : "Transaction Data" },
         { icon: BarChart3, label: isKo ? "연간 + 월간 데이터" : "Annual + Monthly Data" },
+      ],
+    },
+    {
+      category: isKo ? "시트 & 크레딧" : "Seats & Credits",
+      items: [
+        { icon: Users, label: isKo ? "5 시트" : "5 Seats" },
+        { icon: Zap, label: isKo ? "월 10,000 크레딧" : "10,000 Monthly Credits" },
       ],
     },
     {
@@ -29,6 +30,14 @@ const PricingSection = () => {
         { icon: BarChart3, label: isKo ? "분석 & 비교" : "Analyze & Compare" },
         { icon: BarChart3, label: isKo ? "랭킹" : "Rankings" },
         { icon: Bot, label: isKo ? "AI 어시스턴트" : "AI Assistant" },
+      ],
+    },
+    {
+      category: isKo ? "Add-on" : "Add-ons",
+      items: [
+        { icon: Layers, label: isKo ? "카테고리 세분화 도구" : "Category Breakdown Tool" },
+        { icon: ShoppingCart, label: isKo ? "아마존 세분화 분석 도구" : "Amazon Breakdown Analysis Tool" },
+        { icon: UserSearch, label: isKo ? "임직원 DB 탐색 도구" : "Employee DB Explorer Tool" },
       ],
     },
     {
