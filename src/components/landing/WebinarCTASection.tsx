@@ -19,6 +19,7 @@ const WebinarCTASection = () => {
     name: "",
     company: "",
     email: "",
+    phone: "",
     jobTitle: "",
     interest: "",
   });
@@ -37,7 +38,7 @@ const WebinarCTASection = () => {
           name: formData.name,
           company: formData.company,
           email: formData.email,
-          phone: null,
+          phone: formData.phone || null,
           message: `[컨설팅 신청] 직함: ${formData.jobTitle}${formData.interest ? `, 관심분야: ${formData.interest}` : ""}`,
         }),
       });
@@ -241,6 +242,19 @@ const WebinarCTASection = () => {
                         onChange={handleChange}
                         required
                         placeholder="example@company.com"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium mb-2 block">
+                        {isKo ? "빠른 유선 연결 (선택)" : "Phone for Quick Contact (Optional)"}
+                      </label>
+                      <Input
+                        name="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="010-1234-5678"
                       />
                     </div>
 
