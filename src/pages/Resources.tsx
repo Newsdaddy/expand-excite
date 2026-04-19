@@ -125,6 +125,20 @@ const defaultResources = [
     file_path: "/downloads/ECDB_E-Commerce_in_Europe_2026.pdf",
     is_public: true,
   },
+  {
+    id: "10",
+    category: "ecommerce" as CategoryType,
+    title: "TikTok GMV Data (Apr 2026 Update)",
+    titleKo: "틱톡 실거래 기반 매출 자료 (26년 4월 업데이트)",
+    description: "TikTok Shop transaction-based GMV data and analytics - April 2026 latest update",
+    descKo: "틱톡샵 실거래 기반 GMV 매출 데이터 및 분석 자료 - 2026년 4월 최신 업데이트",
+    file_type: "ZIP Archive",
+    pages: undefined,
+    icon: TrendingUp,
+    thumbnail_url: "/downloads/TikTok_logo_thumb.png",
+    file_path: "/downloads/TikTok_GMV_Data_Apr2026.zip",
+    is_public: true,
+  },
   // Practical AX Cases
   {
     id: "5",
